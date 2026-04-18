@@ -14,18 +14,37 @@ import Logo from '../common/Logo.astro';
       <a href="/journal" class="nav-link transition-colors hover:opacity-70">Journal</a>
     </nav>
 
+    <!-- Mobile Hamburger Toggle -->
+    <button id="mobile-menu-toggle" class="md:hidden flex items-center justify-center p-2 z-[60] text-current transition-colors" aria-label="Toggle Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="8" x2="20" y2="8"></line>
+        <line x1="4" y1="16" x2="20" y2="16"></line>
+      </svg>
+    </button>
+
     <!-- Center Logo -->
-    <div class="absolute left-1/2 -translate-x-1/2 mt-1">
+    <div class="absolute left-1/2 -translate-x-1/2 mt-1 z-[60]">
       <a href="/" class="block hover:opacity-80 transition-opacity">
         <Logo id="header-logo" size={56} class="transition-colors duration-300 text-white/90" />
       </a>
     </div>
 
     <!-- Right Actions -->
-    <div class="flex items-center">
+    <div class="hidden md:flex items-center">
       <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[13px] tracking-wide">Begin Your Journey</Button>
     </div>
 
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-[#fdfaf5] z-50 flex flex-col items-center justify-center translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
+    <nav class="flex flex-col items-center gap-8 text-[24px] font-normal tracking-wide text-[#2c2c2c] mb-12">
+      <a href="/" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Home</a>
+      <a href="/about" class="mobile-nav-link hover:text-[#9c512c] transition-colors">About</a>
+      <a href="/services" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Services</a>
+      <a href="/journal" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Journal</a>
+    </nav>
+    <Button href="/contact" variant="primary" className="!px-8 !py-[12px] !text-[15px] tracking-wide">Begin Your Journey</Button>
   </div>
 </header>
 
@@ -34,9 +53,41 @@ import Logo from '../common/Logo.astro';
     var header = document.getElementById('site-header');
     var logo = document.getElementById('header-logo');
     var navLinks = document.querySelectorAll('.nav-link');
+    var toggleBtn = document.getElementById('mobile-menu-toggle');
+    var mobileMenu = document.getElementById('mobile-menu-overlay');
     var heroHeight = window.innerHeight * 0.6;
+    var isMenuOpen = false;
+
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        mobileMenu.style.transform = 'translateY(0)';
+        document.body.style.overflow = 'hidden';
+        if (logo) { logo.style.color = '#9c512c'; }
+        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      } else {
+        mobileMenu.style.transform = 'translateY(-100%)';
+        document.body.style.overflow = '';
+        onScroll(); // Reset colors depending on scroll pos
+        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleMenu);
+    }
+
+    // Close menu when clicking link
+    var mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (isMenuOpen) toggleMenu();
+      });
+    });
 
     function onScroll() {
+      if (isMenuOpen) return; // Don't alter header style if menu is open
+
       var scrolled = window.scrollY > heroHeight;
 
       if (scrolled) {
@@ -46,6 +97,7 @@ import Logo from '../common/Logo.astro';
         header.style.boxShadow = '0 1px 24px rgba(0,0,0,0.06)';
         if (logo) { logo.style.color = '#9c512c'; }
         navLinks.forEach(function(link) { link.style.color = '#2c2c2c'; });
+        if (toggleBtn) { toggleBtn.style.color = '#2c2c2c'; }
       } else {
         header.style.background = 'transparent';
         header.style.backdropFilter = 'none';
@@ -53,6 +105,7 @@ import Logo from '../common/Logo.astro';
         header.style.boxShadow = 'none';
         if (logo) { logo.style.color = 'rgba(255,255,255,0.9)'; }
         navLinks.forEach(function(link) { link.style.color = 'white'; });
+        if (toggleBtn) { toggleBtn.style.color = 'white'; }
       }
     }
 

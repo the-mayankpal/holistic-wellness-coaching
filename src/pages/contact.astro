@@ -24,26 +24,47 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
 		
         <!-- NAVBAR -->
         <header id="contact-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; padding-top: 32px; padding-bottom: 24px; transition: all 0.3s ease;">
-            <div style="max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; position: relative;">
+            <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: relative;">
                 
-                <nav style="display: flex; align-items: center; gap: 32px; font-size: 13.5px; font-weight: 500; font-family: 'Inter', sans-serif; letter-spacing: 0.02em; color: #2c2c2c;">
+                <nav class="hidden md:flex" style="align-items: center; gap: 32px; font-size: 13.5px; font-weight: 500; font-family: 'Inter', sans-serif; letter-spacing: 0.02em; color: #2c2c2c;">
                     <a href="/" style="text-decoration: none; color: inherit;">Home</a>
                     <a href="/about" style="text-decoration: none; color: inherit;">About</a>
                     <a href="/services" style="text-decoration: none; color: inherit;">Services</a>
                     <a href="/journal" style="text-decoration: none; color: inherit;">Journal</a>
                 </nav>
 
-                <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+                <!-- Mobile Hamburger -->
+                <button id="contact-menu-toggle" class="md:hidden" style="display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; z-index: 60; color: #2c2c2c;" aria-label="Toggle Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="8" x2="20" y2="8"></line>
+                        <line x1="4" y1="16" x2="20" y2="16"></line>
+                    </svg>
+                </button>
+
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 60;">
                     <a href="/" style="text-decoration: none; color: #2c2c2c;">
                         <Logo id="header-logo" size={54} />
                     </a>
                 </div>
 
-                <div style="display: flex; align-items: center;">
+                <div class="hidden md:flex" style="align-items: center;">
                     <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 28px; border-radius: 9999px; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
                         Begin Your Journey
                     </a>
                 </div>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="contact-menu-overlay" class="md:hidden" style="position: fixed; inset: 0; background-color: #fdfaf5; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: transform 0.5s ease;">
+                <nav style="display: flex; flex-direction: column; align-items: center; gap: 32px; font-size: 24px; color: #2c2c2c; margin-bottom: 48px;">
+                    <a href="/" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Home</a>
+                    <a href="/about" class="contact-mobile-link" style="text-decoration: none; color: inherit;">About</a>
+                    <a href="/services" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Services</a>
+                    <a href="/journal" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Journal</a>
+                </nav>
+                <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 32px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none;">
+                    Begin Your Journey
+                </a>
             </div>
         </header>
 
@@ -52,13 +73,13 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
         <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; position: relative; z-index: 10; min-height: 90vh;">
             
             <!-- Left Text Content -->
-            <div style="width: 50%; min-width: 320px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 128px 8% 128px 12%; background-color: #f4ebd9; box-sizing: border-box;">
+            <div style="width: 50%; min-width: 300px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 128px 8% 80px 8%; background-color: #f4ebd9; box-sizing: border-box;">
                 
                 <span style="display: inline-block; font-weight: 500; letter-spacing: 0.02em; border-radius: 9999px; background-color: #9c512c; color: white; padding: 6px 20px; font-size: 12px; margin-bottom: 32px; font-family: 'Inter', sans-serif;">
                     Contact
                 </span>
                 
-                <h1 style="font-family: 'Playfair Display', serif; font-weight: 400; color: #2c3338; font-size: 76px; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 28px;">
+                <h1 class="contact-hero-heading" style="font-family: 'Playfair Display', serif; font-weight: 400; color: #2c3338; font-size: 76px; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 28px;">
                     Let's have a<br/>
                     <span style="color: #bc6b3c;">conversation.</span>
                 </h1>
@@ -82,12 +103,12 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
         </div>
 
         <!-- CONTACT OPTIONS SECTION -->
-        <section style="width: 100%; display: flex; justify-content: center; padding: 128px 24px; background-color: #fcfbfa; box-sizing: border-box;">
-            <!-- Grid wrapper to guarantee desktop 50/50 split and standard gaps -->
-            <div style="width: 100%; max-width: 1240px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; box-sizing: border-box;">
+        <section style="width: 100%; display: flex; justify-content: center; padding: 80px 20px; background-color: #fcfbfa; box-sizing: border-box;">
+            <!-- Grid wrapper -->
+            <div style="width: 100%; max-width: 1240px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 40px; box-sizing: border-box;">
                 
                 <!-- LEFT PANEL: Calender Pick -->
-                <div style="background-color: #f4ebd9; border-radius: 24px; padding: 56px 64px; display: flex; flex-direction: column; box-sizing: border-box;">
+                <div style="background-color: #f4ebd9; border-radius: 24px; padding: 40px 28px; display: flex; flex-direction: column; box-sizing: border-box;">
                     
                     <span style="display: inline-block; background-color: white; color: #55524d; padding: 5px 16px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'Inter', sans-serif; align-self: flex-start; margin-bottom: 24px;">
                         Book a free session
@@ -147,7 +168,7 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
                 </div>
 
                 <!-- RIGHT PANEL: Direct Message Form -->
-                <div style="background-color: #f4ebd9; border-radius: 24px; padding: 56px 64px; display: flex; flex-direction: column; box-sizing: border-box;">
+                <div style="background-color: #f4ebd9; border-radius: 24px; padding: 40px 28px; display: flex; flex-direction: column; box-sizing: border-box;">
                     
                     <span style="display: inline-block; background-color: #9c512c; color: white; padding: 5px 16px; border-radius: 99px; font-size: 11px; font-weight: 500; font-family: 'Inter', sans-serif; align-self: flex-start; margin-bottom: 24px;">
                         Get in touch
@@ -208,7 +229,29 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
         <script is:inline>
             (function () {
                 var header = document.getElementById('contact-header');
+                var toggleBtn = document.getElementById('contact-menu-toggle');
+                var mobileMenu = document.getElementById('contact-menu-overlay');
+                var isMenuOpen = false;
+
+                function toggleMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    if (isMenuOpen) {
+                        mobileMenu.style.transform = 'translateY(0)';
+                        document.body.style.overflow = 'hidden';
+                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                    } else {
+                        mobileMenu.style.transform = 'translateY(-100%)';
+                        document.body.style.overflow = '';
+                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
+                    }
+                }
+                if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
+                document.querySelectorAll('.contact-mobile-link').forEach(function(link) {
+                    link.addEventListener('click', function() { if (isMenuOpen) toggleMenu(); });
+                });
+
                 function onScroll() {
+                    if (isMenuOpen) return;
                     if (window.scrollY > 50) {
                         header.style.background = 'rgba(244, 235, 217, 0.96)';
                         header.style.backdropFilter = 'blur(12px)';
@@ -229,5 +272,13 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
                 onScroll();
             })();
         </script>
+
+        <style>
+            @media (max-width: 640px) {
+                .contact-hero-heading {
+                    font-size: 48px !important;
+                }
+            }
+        </style>
 	</body>
 </html>

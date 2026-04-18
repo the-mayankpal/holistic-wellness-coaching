@@ -17,20 +17,20 @@ const signs = [
 ];
 ---
 
-<section class="w-full relative overflow-hidden" style="background-color: #fcfbfa; min-height: 100vh; padding: 160px 0; display: flex; align-items: center; justify-content: center;">
+<section class="w-full relative overflow-hidden bg-[#fcfbfa] min-h-screen py-24 md:py-[160px] flex items-center justify-center">
     
-    <div class="relative w-full max-w-[1240px] flex items-center justify-center mx-auto" style="height: 700px;">
+    <div class="relative w-full max-w-[1240px] flex flex-col items-center justify-center mx-auto md:h-[700px]">
         
-        <!-- Central Title (Fixed) -->
-        <div class="absolute z-10 text-center pointer-events-none px-4">
-            <h2 style="font-family: 'Inter', sans-serif; font-size: 72px; font-weight: 400; color: #2c3338; line-height: 1.05; letter-spacing: -0.04em;">
+        <!-- Central Title -->
+        <div class="relative md:absolute z-10 text-center pointer-events-none px-4 mb-16 md:mb-0 md:top-1/2 md:-translate-y-1/2">
+            <h2 style="font-family: 'Inter', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 400; color: #2c3338; line-height: 1.05; letter-spacing: -0.04em;">
                 The signs that something<br/>
                 <span style="color: #9c512c;">needs</span> to change.
             </h2>
         </div>
 
-        <!-- Orbital Engine (CSS Driven, 0JS, Hyper-Performant) -->
-        <div class="orbit-master" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0;">
+        <!-- Orbital Engine (CSS Driven, Desktop Only) -->
+        <div class="orbit-master hidden md:block" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0;">
             {signs.map((sign, i) => {
                 const angle = i * (360 / signs.length);
                 return (
@@ -63,6 +63,20 @@ const signs = [
                     </div>
                 );
             })}
+        </div>
+
+        <!-- Mobile Vertical Stack (CSS Driven, Mobile Only) -->
+        <div class="flex flex-col md:hidden gap-5 px-6 relative z-10 w-full max-w-[380px]">
+            {signs.map((sign) => (
+                <div class="flex items-center bg-[#f4ebd9] p-2 pr-5 rounded-full gap-4 pointer-events-auto" style="box-shadow: 0 8px 24px rgba(0,0,0,0.03);">
+                    <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                        <Image src={sign.img} alt="Sign" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+                    </div>
+                    <p style="font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 300; color: #3b3631; line-height: 1.4; margin: 0; text-align: left;">
+                        {sign.text}
+                    </p>
+                </div>
+            ))}
         </div>
 
     </div>

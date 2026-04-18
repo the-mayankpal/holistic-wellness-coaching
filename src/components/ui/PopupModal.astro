@@ -13,7 +13,7 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
         <div style="display: flex; flex-direction: row; width: 100%;">
             
             <!-- Left Text Content -->
-            <div style="width: 58%; padding: 56px 48px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="popup-text-panel" style="width: 58%; padding: 56px 48px; display: flex; flex-direction: column; justify-content: center;">
                 
                 <!-- Badge -->
                 <span style="display: inline-block; background-color: rgba(255,255,255,0.7); color: #2c3338; font-size: 11px; font-weight: 500; font-family: 'Inter', sans-serif; padding: 6px 16px; border-radius: 999px; align-self: flex-start; margin-bottom: 24px;">
@@ -42,7 +42,7 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
             </div>
 
             <!-- Right Image Area -->
-            <div style="width: 42%; position: relative;">
+            <div class="popup-image-panel" style="width: 42%; position: relative;">
                 <Image src={imgPopup} alt="Calm" style="width: 100%; height: 100%; object-fit: cover;" />
                 
                 <!-- Close Button over Image -->
@@ -54,6 +54,25 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
 
     </div>
 </div>
+
+<style>
+    @media (max-width: 768px) {
+        #popup-content > div {
+            flex-direction: column !important;
+        }
+        .popup-text-panel {
+            width: 100% !important;
+            padding: 36px 24px !important;
+        }
+        .popup-image-panel {
+            display: none !important;
+        }
+        #popup-content {
+            width: 94% !important;
+            max-width: 440px !important;
+        }
+    }
+</style>
 
 <script is:inline>
     // Self-executing function to isolate scope

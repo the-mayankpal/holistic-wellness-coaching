@@ -34,7 +34,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
             
             <!-- NAVBAR -->
             <header id="services-header" class="fixed top-0 left-0 w-full z-50 pt-8 pb-5 transition-all duration-300">
-                <div class="max-w-7xl mx-auto px-8 lg:px-12 flex items-center justify-between relative">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between relative">
                     
                     <!-- Left Navigation -->
                     <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide" style="color: #2c2c2c;">
@@ -44,19 +44,38 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                         <a href="/journal" class="transition-colors hover:opacity-75">Journal</a>
                     </nav>
 
+                    <!-- Mobile Hamburger -->
+                    <button id="services-menu-toggle" class="md:hidden flex items-center justify-center p-2 z-[60] text-[#2c2c2c] transition-colors" aria-label="Toggle Menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="8" x2="20" y2="8"></line>
+                            <line x1="4" y1="16" x2="20" y2="16"></line>
+                        </svg>
+                    </button>
+
                     <!-- Center Logo -->
-                    <div class="absolute left-1/2 -translate-x-1/2 mt-1">
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-1 z-[60]">
                         <a href="/" class="block hover:opacity-70 transition-opacity" style="color: #2c2c2c;">
                             <Logo id="header-logo" size={54} />
                         </a>
                     </div>
 
                     <!-- Right Actions -->
-                    <div class="flex items-center">
+                    <div class="hidden md:flex items-center">
                         <Button href="/contact" variant="primary" className="!px-7 !py-3 !text-sm font-medium opacity-95 shadow-sm border-none" style="background-color: #9c512c; color: white;">
                             Begin Your Journey
                         </Button>
                     </div>
+                </div>
+
+                <!-- Mobile Menu Overlay -->
+                <div id="services-menu-overlay" class="fixed inset-0 bg-[#fdfaf5] z-50 flex flex-col items-center justify-center translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
+                    <nav class="flex flex-col items-center gap-8 text-[24px] font-normal tracking-wide text-[#2c2c2c] mb-12">
+                        <a href="/" class="services-mobile-link hover:text-[#9c512c] transition-colors">Home</a>
+                        <a href="/about" class="services-mobile-link hover:text-[#9c512c] transition-colors">About</a>
+                        <a href="/services" class="services-mobile-link hover:text-[#9c512c] transition-colors">Services</a>
+                        <a href="/journal" class="services-mobile-link hover:text-[#9c512c] transition-colors">Journal</a>
+                    </nav>
+                    <Button href="/contact" variant="primary" className="!px-8 !py-[12px] !text-[15px] tracking-wide">Begin Your Journey</Button>
                 </div>
             </header>
 
@@ -69,7 +88,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                 </span>
                 
                 <!-- Headline -->
-                <h1 class="font-serif font-normal" style="color: #2c3338; font-size: 82px; line-height: 0.98; letter-spacing: -0.02em; margin-bottom: 24px;">
+                <h1 class="font-serif font-normal" style="color: #2c3338; font-size: clamp(48px, 8vw, 82px); line-height: 0.98; letter-spacing: -0.02em; margin-bottom: 24px;">
                     Guiding you<br/>
                     back to <span style="color: #9c512c;">balance.</span>
                 </h1>
@@ -94,7 +113,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
             </div>
             
             <!-- Heading -->
-            <h2 class="font-sans font-medium" style="color: #282725; font-size: 48px; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 16px;">
+            <h2 class="font-sans font-medium" style="color: #282725; font-size: clamp(36px, 5vw, 48px); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 16px;">
                 Four areas with <span style="color: #9c512c;">one approach.</span>
             </h2>
             
@@ -111,7 +130,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                     <div class="relative w-full" style="height: 270px;">
                         <Image src={imgStress} alt="Stress and Anxiety" class="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div class="flex flex-col items-start w-full" style="padding: 36px 40px 44px 36px;">
+                    <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
                         <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Stress & Anxiety</h3>
                         <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
                             When your mind won't switch off and your body's stuck in fight-or-flight. We work on calming your nervous system and building a life that doesn't constantly overwhelm you.
@@ -135,7 +154,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                     <div class="relative w-full" style="height: 270px;">
                          <Image src={imgBurnout} alt="Burnout recovery" class="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div class="flex flex-col items-start w-full" style="padding: 36px 40px 44px 36px;">
+                    <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
                         <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Burnout recovery</h3>
                         <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
                             You pushed too hard for too long and now you're running on empty. We rebuild from the ground up, starting with rest and working toward a routine that doesn't break you again.
@@ -159,7 +178,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                     <div class="relative w-full" style="height: 270px;">
                          <Image src={imgTransitions} alt="Life transitions" class="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div class="flex flex-col items-start w-full" style="padding: 36px 40px 44px 36px;">
+                    <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
                         <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Life transitions</h3>
                         <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
                             Career changes, relationship shifts, becoming a parent, moving countries. The big life moments that leave you feeling unsteady. We work through the adjustment together.
@@ -183,7 +202,7 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
                     <div class="relative w-full" style="height: 270px;">
                          <Image src={imgMindful} alt="Mindful living" class="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div class="flex flex-col items-start w-full" style="padding: 36px 40px 44px 36px;">
+                    <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
                         <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Mindful living</h3>
                         <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
                             For people who want to be more intentional about how they live. We look at habits, routines, and boundaries so you actually enjoy your days instead of just getting through them.
@@ -221,7 +240,29 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
         <script is:inline>
             (function () {
                 var header = document.getElementById('services-header');
+                var toggleBtn = document.getElementById('services-menu-toggle');
+                var mobileMenu = document.getElementById('services-menu-overlay');
+                var isMenuOpen = false;
+
+                function toggleMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    if (isMenuOpen) {
+                        mobileMenu.style.transform = 'translateY(0)';
+                        document.body.style.overflow = 'hidden';
+                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                    } else {
+                        mobileMenu.style.transform = 'translateY(-100%)';
+                        document.body.style.overflow = '';
+                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
+                    }
+                }
+                if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
+                document.querySelectorAll('.services-mobile-link').forEach(function(link) {
+                    link.addEventListener('click', function() { if (isMenuOpen) toggleMenu(); });
+                });
+
                 function onScroll() {
+                    if (isMenuOpen) return;
                     if (window.scrollY > 50) {
                         header.style.background = 'rgba(244, 235, 217, 0.96)';
                         header.style.backdropFilter = 'blur(12px)';
