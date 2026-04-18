@@ -3,113 +3,263 @@ import Button from '../ui/Button.astro';
 import Logo from '../common/Logo.astro';
 ---
 
-<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 text-white">
-  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-7 flex items-center justify-between">
+<header id="site-header" class="site-header">
+  <div class="header-inner">
     
-    <!-- Left Navigation -->
-    <nav class="hidden md:flex items-center gap-7 text-[15px] font-light tracking-wide">
-      <a href="/" class="nav-link transition-colors hover:opacity-70">Home</a>
-      <a href="/about" class="nav-link transition-colors hover:opacity-70">About</a>
-      <a href="/services" class="nav-link transition-colors hover:opacity-70">Services</a>
-      <a href="/journal" class="nav-link transition-colors hover:opacity-70">Journal</a>
+    <!-- Logo (always visible, left on mobile, center on desktop) -->
+    <a href="/" class="header-logo-link">
+      <Logo id="header-logo" size={56} class="transition-colors duration-300" />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/services" class="nav-link">Services</a>
+      <a href="/journal" class="nav-link">Journal</a>
     </nav>
 
-    <!-- Mobile Hamburger Toggle -->
-    <button id="mobile-menu-toggle" class="md:hidden flex items-center justify-center p-2 z-[60] text-current transition-colors" aria-label="Toggle Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Desktop CTA -->
+    <div class="desktop-cta">
+      <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[13px] tracking-wide">Begin Your Journey</Button>
+    </div>
+
+    <!-- Hamburger (mobile only) -->
+    <button id="mobile-menu-toggle" class="hamburger-btn" aria-label="Toggle Menu">
+      <svg id="hamburger-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="4" y1="8" x2="20" y2="8"></line>
         <line x1="4" y1="16" x2="20" y2="16"></line>
       </svg>
     </button>
-
-    <!-- Center Logo -->
-    <div class="absolute left-1/2 -translate-x-1/2 mt-1 z-[60]">
-      <a href="/" class="block hover:opacity-80 transition-opacity">
-        <Logo id="header-logo" size={56} class="transition-colors duration-300 text-white/90" />
-      </a>
-    </div>
-
-    <!-- Right Actions -->
-    <div class="hidden md:flex items-center">
-      <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[13px] tracking-wide">Begin Your Journey</Button>
-    </div>
-
   </div>
 
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu-overlay" class="fixed inset-0 bg-[#fdfaf5] z-50 flex flex-col items-center justify-center translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
-    <nav class="flex flex-col items-center gap-8 text-[24px] font-normal tracking-wide text-[#2c2c2c] mb-12">
-      <a href="/" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Home</a>
-      <a href="/about" class="mobile-nav-link hover:text-[#9c512c] transition-colors">About</a>
-      <a href="/services" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Services</a>
-      <a href="/journal" class="mobile-nav-link hover:text-[#9c512c] transition-colors">Journal</a>
-    </nav>
-    <Button href="/contact" variant="primary" className="!px-8 !py-[12px] !text-[15px] tracking-wide">Begin Your Journey</Button>
+  <!-- Mobile Dropdown -->
+  <div id="mobile-dropdown" class="mobile-dropdown">
+    <a href="/" class="mobile-link">Home</a>
+    <a href="/about" class="mobile-link">About</a>
+    <a href="/services" class="mobile-link">Services</a>
+    <a href="/journal" class="mobile-link">Journal</a>
+    <a href="/contact" class="mobile-cta-link">Begin Your Journey</a>
   </div>
 </header>
+
+<style>
+  /* ===== BASE HEADER ===== */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    padding: 28px 0;
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .header-logo-link {
+    display: block;
+    z-index: 100;
+    color: rgba(255, 255, 255, 0.9);
+    transition: opacity 0.2s;
+    line-height: 0;
+  }
+  .header-logo-link:hover { opacity: 0.8; }
+
+  /* ===== DESKTOP NAV ===== */
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 28px;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: white;
+  }
+  .desktop-nav .nav-link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+  }
+  .desktop-nav .nav-link:hover { opacity: 0.7; }
+
+  .desktop-cta {
+    display: none;
+  }
+
+  /* ===== HAMBURGER ===== */
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    color: white;
+    transition: color 0.3s;
+  }
+
+  /* ===== MOBILE DROPDOWN ===== */
+  .mobile-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    background: #fdfaf5;
+    border-top: 1px solid #ebe4da;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  .mobile-dropdown.is-open {
+    max-height: 380px;
+    opacity: 1;
+    padding: 24px 20px;
+  }
+
+  .mobile-link {
+    text-decoration: none;
+    color: #2c2c2c;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 10px 0;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .mobile-link:hover { color: #9c512c; }
+
+  .mobile-cta-link {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    background-color: #9c512c;
+    color: white;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+  .mobile-cta-link:hover { opacity: 0.9; }
+
+  /* ===== DESKTOP (768px+) ===== */
+  @media (min-width: 768px) {
+    .site-header {
+      padding: 28px 0;
+    }
+    .header-inner {
+      padding: 0 48px;
+    }
+    .header-logo-link {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .desktop-nav {
+      display: flex;
+    }
+    .desktop-cta {
+      display: flex;
+      align-items: center;
+    }
+    .hamburger-btn {
+      display: none;
+    }
+    .mobile-dropdown {
+      display: none !important;
+    }
+  }
+
+  /* ===== SCROLLED STATE (set by JS) ===== */
+  .site-header.is-scrolled {
+    background: rgba(253, 250, 245, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 24px rgba(0,0,0,0.06);
+    padding: 16px 0;
+  }
+  .site-header.is-scrolled .header-logo-link {
+    color: #9c512c;
+  }
+  .site-header.is-scrolled .desktop-nav {
+    color: #2c2c2c;
+  }
+  .site-header.is-scrolled .hamburger-btn {
+    color: #2c2c2c;
+  }
+
+  /* Menu-open state (set by JS) */
+  .site-header.menu-open {
+    background: rgba(253, 250, 245, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .site-header.menu-open .header-logo-link {
+    color: #9c512c;
+  }
+  .site-header.menu-open .hamburger-btn {
+    color: #2c2c2c;
+  }
+</style>
 
 <script is:inline>
   (function () {
     var header = document.getElementById('site-header');
     var logo = document.getElementById('header-logo');
-    var navLinks = document.querySelectorAll('.nav-link');
     var toggleBtn = document.getElementById('mobile-menu-toggle');
-    var mobileMenu = document.getElementById('mobile-menu-overlay');
+    var dropdown = document.getElementById('mobile-dropdown');
     var heroHeight = window.innerHeight * 0.6;
-    var isMenuOpen = false;
+    var isOpen = false;
 
-    function toggleMenu() {
-      isMenuOpen = !isMenuOpen;
-      if (isMenuOpen) {
-        mobileMenu.style.transform = 'translateY(0)';
-        document.body.style.overflow = 'hidden';
-        if (logo) { logo.style.color = '#9c512c'; }
-        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-      } else {
-        mobileMenu.style.transform = 'translateY(-100%)';
-        document.body.style.overflow = '';
-        onScroll(); // Reset colors depending on scroll pos
-        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
-      }
+    function openMenu() {
+      isOpen = true;
+      dropdown.classList.add('is-open');
+      header.classList.add('menu-open');
+      toggleBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      dropdown.classList.remove('is-open');
+      header.classList.remove('menu-open');
+      toggleBtn.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
+      handleScroll();
     }
 
     if (toggleBtn) {
-      toggleBtn.addEventListener('click', toggleMenu);
+      toggleBtn.addEventListener('click', function () {
+        if (isOpen) { closeMenu(); } else { openMenu(); }
+      });
     }
 
-    // Close menu when clicking link
-    var mobileLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        if (isMenuOpen) toggleMenu();
-      });
-    });
+    // Close on link click
+    var mobileLinks = dropdown.querySelectorAll('.mobile-link');
+    for (var i = 0; i < mobileLinks.length; i++) {
+      mobileLinks[i].addEventListener('click', closeMenu);
+    }
 
-    function onScroll() {
-      if (isMenuOpen) return; // Don't alter header style if menu is open
-
-      var scrolled = window.scrollY > heroHeight;
-
-      if (scrolled) {
-        header.style.background = 'rgba(253, 250, 245, 0.97)';
-        header.style.backdropFilter = 'blur(14px)';
-        header.style.WebkitBackdropFilter = 'blur(14px)';
-        header.style.boxShadow = '0 1px 24px rgba(0,0,0,0.06)';
-        if (logo) { logo.style.color = '#9c512c'; }
-        navLinks.forEach(function(link) { link.style.color = '#2c2c2c'; });
-        if (toggleBtn) { toggleBtn.style.color = '#2c2c2c'; }
+    function handleScroll() {
+      if (isOpen) return;
+      if (window.scrollY > heroHeight) {
+        header.classList.add('is-scrolled');
       } else {
-        header.style.background = 'transparent';
-        header.style.backdropFilter = 'none';
-        header.style.WebkitBackdropFilter = 'none';
-        header.style.boxShadow = 'none';
-        if (logo) { logo.style.color = 'rgba(255,255,255,0.9)'; }
-        navLinks.forEach(function(link) { link.style.color = 'white'; });
-        if (toggleBtn) { toggleBtn.style.color = 'white'; }
+        header.classList.remove('is-scrolled');
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
   })();
 </script>

@@ -26,6 +26,14 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
         <header id="contact-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; padding-top: 32px; padding-bottom: 24px; transition: all 0.3s ease;">
             <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: relative;">
                 
+                <!-- Logo: always visible, left on mobile -->
+                <div class="md:absolute md:left-1/2 md:-translate-x-1/2" style="z-index: 60;">
+                    <a href="/" style="text-decoration: none; color: #2c2c2c;">
+                        <Logo id="header-logo" size={54} />
+                    </a>
+                </div>
+
+                <!-- Desktop Nav -->
                 <nav class="hidden md:flex" style="align-items: center; gap: 32px; font-size: 13.5px; font-weight: 500; font-family: 'Inter', sans-serif; letter-spacing: 0.02em; color: #2c2c2c;">
                     <a href="/" style="text-decoration: none; color: inherit;">Home</a>
                     <a href="/about" style="text-decoration: none; color: inherit;">About</a>
@@ -33,38 +41,35 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
                     <a href="/journal" style="text-decoration: none; color: inherit;">Journal</a>
                 </nav>
 
-                <!-- Mobile Hamburger -->
+                <!-- Desktop CTA -->
+                <div class="hidden md:flex" style="align-items: center;">
+                    <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 28px; border-radius: 9999px; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
+                        Begin Your Journey
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger (right side) -->
                 <button id="contact-menu-toggle" class="md:hidden" style="display: flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; z-index: 60; color: #2c2c2c;" aria-label="Toggle Menu">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="4" y1="8" x2="20" y2="8"></line>
                         <line x1="4" y1="16" x2="20" y2="16"></line>
                     </svg>
                 </button>
-
-                <div style="position: absolute; left: 50%; transform: translateX(-50%); z-index: 60;">
-                    <a href="/" style="text-decoration: none; color: #2c2c2c;">
-                        <Logo id="header-logo" size={54} />
-                    </a>
-                </div>
-
-                <div class="hidden md:flex" style="align-items: center;">
-                    <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 28px; border-radius: 9999px; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
-                        Begin Your Journey
-                    </a>
-                </div>
             </div>
 
-            <!-- Mobile Menu Overlay -->
-            <div id="contact-menu-overlay" class="md:hidden" style="position: fixed; inset: 0; background-color: #fdfaf5; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-100%); transition: transform 0.5s ease;">
-                <nav style="display: flex; flex-direction: column; align-items: center; gap: 32px; font-size: 24px; color: #2c2c2c; margin-bottom: 48px;">
-                    <a href="/" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Home</a>
-                    <a href="/about" class="contact-mobile-link" style="text-decoration: none; color: inherit;">About</a>
-                    <a href="/services" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Services</a>
-                    <a href="/journal" class="contact-mobile-link" style="text-decoration: none; color: inherit;">Journal</a>
-                </nav>
-                <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 32px; border-radius: 9999px; font-size: 15px; font-weight: 500; text-decoration: none;">
-                    Begin Your Journey
-                </a>
+            <!-- Mobile Dropdown Menu -->
+            <div id="contact-menu-overlay" class="md:hidden" style="overflow: hidden; transition: all 0.4s ease; max-height: 0; opacity: 0;">
+                <div style="background-color: #fdfaf5; border-top: 1px solid #e8e0d5; padding: 32px 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                    <a href="/" class="contact-mobile-link" style="text-decoration: none; color: #2c2c2c; font-size: 17px;">Home</a>
+                    <a href="/about" class="contact-mobile-link" style="text-decoration: none; color: #2c2c2c; font-size: 17px;">About</a>
+                    <a href="/services" class="contact-mobile-link" style="text-decoration: none; color: #2c2c2c; font-size: 17px;">Services</a>
+                    <a href="/journal" class="contact-mobile-link" style="text-decoration: none; color: #2c2c2c; font-size: 17px;">Journal</a>
+                    <div style="padding-top: 12px; width: 100%;">
+                        <a href="/contact" style="display: block; text-align: center; background-color: #9c512c; color: white; padding: 12px 24px; border-radius: 9999px; font-size: 14px; font-weight: 500; text-decoration: none;">
+                            Begin Your Journey
+                        </a>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -236,12 +241,16 @@ const CalendarIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none
                 function toggleMenu() {
                     isMenuOpen = !isMenuOpen;
                     if (isMenuOpen) {
-                        mobileMenu.style.transform = 'translateY(0)';
-                        document.body.style.overflow = 'hidden';
+                        mobileMenu.style.maxHeight = '400px';
+                        mobileMenu.style.opacity = '1';
+                        header.style.background = 'rgba(244, 235, 217, 0.96)';
+                        header.style.backdropFilter = 'blur(12px)';
+                        header.style.WebkitBackdropFilter = 'blur(12px)';
                         toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
                     } else {
-                        mobileMenu.style.transform = 'translateY(-100%)';
-                        document.body.style.overflow = '';
+                        mobileMenu.style.maxHeight = '0';
+                        mobileMenu.style.opacity = '0';
+                        onScroll();
                         toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
                     }
                 }

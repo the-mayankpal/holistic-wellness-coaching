@@ -33,7 +33,14 @@ import imgBoundaries from '../assets/images/services/journal_boundaries_17765482
             <header id="journal-header" class="fixed top-0 left-0 w-full z-50 pt-8 pb-5 transition-all duration-300">
                 <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between relative">
                     
-                    <!-- Left Navigation -->
+                    <!-- Logo: Left on mobile, Center on desktop -->
+                    <div class="md:absolute md:left-1/2 md:-translate-x-1/2 mt-1 z-[60]">
+                        <a href="/" class="block hover:opacity-70 transition-opacity" style="color: #2c2c2c;">
+                            <Logo id="header-logo" size={54} />
+                        </a>
+                    </div>
+
+                    <!-- Left Navigation (Desktop) -->
                     <nav class="hidden md:flex items-center gap-8 text-[13.5px] font-medium tracking-wide" style="color: #2c2c2c;">
                         <a href="/" class="transition-colors hover:opacity-75">Home</a>
                         <a href="/about" class="transition-colors hover:opacity-75">About</a>
@@ -41,38 +48,32 @@ import imgBoundaries from '../assets/images/services/journal_boundaries_17765482
                         <a href="/journal" class="transition-colors hover:opacity-75">Journal</a>
                     </nav>
 
-                    <!-- Mobile Hamburger -->
+                    <!-- Right: CTA desktop, Hamburger mobile -->
+                    <div class="hidden md:flex items-center">
+                        <Button href="/contact" variant="primary" className="!px-7 !py-3 !text-sm font-medium opacity-95 shadow-sm border-none" style="background-color: #9c512c; color: white;">
+                            Begin Your Journey
+                        </Button>
+                    </div>
+
                     <button id="journal-menu-toggle" class="md:hidden flex items-center justify-center p-2 z-[60] text-[#2c2c2c] transition-colors" aria-label="Toggle Menu">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="4" y1="8" x2="20" y2="8"></line>
                             <line x1="4" y1="16" x2="20" y2="16"></line>
                         </svg>
                     </button>
-
-                    <!-- Center Logo -->
-                    <div class="absolute left-1/2 -translate-x-1/2 mt-1 z-[60]">
-                        <a href="/" class="block hover:opacity-70 transition-opacity" style="color: #2c2c2c;">
-                            <Logo id="header-logo" size={54} />
-                        </a>
-                    </div>
-
-                    <!-- Right Actions -->
-                    <div class="hidden md:flex items-center">
-                        <Button href="/contact" variant="primary" className="!px-7 !py-3 !text-sm font-medium opacity-95 shadow-sm border-none" style="background-color: #9c512c; color: white;">
-                            Begin Your Journey
-                        </Button>
-                    </div>
                 </div>
 
-                <!-- Mobile Menu Overlay -->
-                <div id="journal-menu-overlay" class="fixed inset-0 bg-[#fdfaf5] z-50 flex flex-col items-center justify-center translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
-                    <nav class="flex flex-col items-center gap-8 text-[24px] font-normal tracking-wide text-[#2c2c2c] mb-12">
-                        <a href="/" class="journal-mobile-link hover:text-[#9c512c] transition-colors">Home</a>
-                        <a href="/about" class="journal-mobile-link hover:text-[#9c512c] transition-colors">About</a>
-                        <a href="/services" class="journal-mobile-link hover:text-[#9c512c] transition-colors">Services</a>
-                        <a href="/journal" class="journal-mobile-link hover:text-[#9c512c] transition-colors">Journal</a>
-                    </nav>
-                    <Button href="/contact" variant="primary" className="!px-8 !py-[12px] !text-[15px] tracking-wide">Begin Your Journey</Button>
+                <!-- Mobile Dropdown Menu -->
+                <div id="journal-menu-overlay" class="md:hidden overflow-hidden transition-all duration-400 ease-in-out" style="max-height: 0; opacity: 0;">
+                    <div class="bg-[#fdfaf5] border-t border-[#e8e0d5] px-6 py-8 flex flex-col items-start gap-5 shadow-lg">
+                        <a href="/" class="journal-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Home</a>
+                        <a href="/about" class="journal-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">About</a>
+                        <a href="/services" class="journal-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Services</a>
+                        <a href="/journal" class="journal-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Journal</a>
+                        <div class="pt-3 w-full">
+                            <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[14px] tracking-wide w-full text-center justify-center">Begin Your Journey</Button>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -288,12 +289,16 @@ import imgBoundaries from '../assets/images/services/journal_boundaries_17765482
                 function toggleMenu() {
                     isMenuOpen = !isMenuOpen;
                     if (isMenuOpen) {
-                        mobileMenu.style.transform = 'translateY(0)';
-                        document.body.style.overflow = 'hidden';
+                        mobileMenu.style.maxHeight = '400px';
+                        mobileMenu.style.opacity = '1';
+                        header.style.background = 'rgba(244, 235, 217, 0.96)';
+                        header.style.backdropFilter = 'blur(12px)';
+                        header.style.WebkitBackdropFilter = 'blur(12px)';
                         toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
                     } else {
-                        mobileMenu.style.transform = 'translateY(-100%)';
-                        document.body.style.overflow = '';
+                        mobileMenu.style.maxHeight = '0';
+                        mobileMenu.style.opacity = '0';
+                        onScroll();
                         toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
                     }
                 }
