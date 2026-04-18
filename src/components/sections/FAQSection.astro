@@ -1,0 +1,107 @@
+---
+import FAQItem from '../ui/FAQItem.astro';
+
+const journeySteps = [
+  {
+    title: "Meet & Connect",
+    description: "An honest conversation about what's really going on.",
+    // Coffee Cup Icon
+    icon: `<svg width="42" height="42" viewBox="0 0 24 24" fill="none" class="text-[#ad6b44]" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+            <line x1="6" y1="2" x2="6" y2="4"></line>
+            <line x1="10" y1="2" x2="10" y2="4"></line>
+            <line x1="14" y1="2" x2="14" y2="4"></line>
+          </svg>`
+  },
+  {
+    title: "Work Together",
+    description: "Identifying patterns and designing practices that fit your life.",
+    // Minimalist Heart/Handshake representation
+    icon: `<svg width="42" height="42" viewBox="0 0 24 24" fill="none" class="text-[#ad6b44]" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+            <path d="M12 5l-2.5 2.5"></path>
+            <path d="M15.5 8l-4 4"></path>
+          </svg>`
+  },
+  {
+    title: "Feel Like You Again",
+    description: "Moving through days with intention instead of survival mode.",
+    // Sun Icon
+    icon: `<svg width="42" height="42" viewBox="0 0 24 24" fill="none" class="text-[#ad6b44]" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="M4.93 4.93l1.41 1.41"></path>
+            <path d="M17.66 17.66l1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="M6.34 17.66l-1.41 1.41"></path>
+            <path d="M19.07 4.93l-1.41 1.41"></path>
+          </svg>`
+  }
+];
+
+const faqs = [
+  {
+    question: "Do I need technical knowledge to work with you?",
+    answer: "No, this process is entirely about you. We'll find what works intuitively for your life."
+  },
+  {
+    question: "How long does it take to see results?",
+    answer: "Deep transformation takes time, but many clients feel a significant shift in clarity and relief within the first 3 to 4 sessions, as we implement immediate grounding practices."
+  },
+  {
+    question: "What if the automation doesn't work for my business?",
+    answer: "We adapt the systems until they fit seamlessly into your workflow. Customization is embedded into the entire journey."
+  },
+  {
+    question: "How much does it cost?",
+    answer: "Our core programs range from $899 for our intimate 6-person group cohorts, up to $2,999 for the deep 1:1 transformative experience over 12 weeks."
+  },
+  {
+    question: "What happens after implementation?",
+    answer: "You receive a customized sustainability plan and retain access to dedicated check-in systems so you never feel like you're drifting."
+  }
+];
+---
+
+<section id="faq-process" class="w-full bg-[#fdfcf9] py-24 lg:py-32">
+  <div class="max-w-[1100px] mx-auto px-6 sm:px-10 lg:px-12">
+    
+    <!-- Top Process Tier -->
+    <div id="process-container" class="relative mb-28 lg:mb-32 max-w-5xl mx-auto px-4">
+
+      <!-- 3 Step Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 relative" style="z-index: 2;">
+        {journeySteps.map((step) => (
+          <div class="flex flex-col items-center text-center">
+            <!-- Icon wrapper with section bg to visually mask the curve behind it -->
+            <div
+              class="relative flex items-center justify-center mb-5"
+              style="width:68px; height:68px; background:#fdfcf9; border-radius:50%;"
+              set:html={step.icon}
+            />
+            <h3 class="text-[#2c2c2c] text-[19px] font-medium mb-2 tracking-tight">{step.title}</h3>
+            <p class="text-[#7a7a7a] text-[14px] font-light leading-relaxed max-w-[220px]">
+              {step.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom FAQ Tier -->
+    <div class="max-w-[800px] mx-auto">
+      <div class="flex flex-col">
+        {faqs.map(faq => (
+          <FAQItem 
+            question={faq.question}
+            answer={faq.answer}
+          />
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Button from '../components/ui/Button.astro';
+import Logo from '../components/common/Logo.astro';
+import aboutImage from '../assets/images/aboutpageimage.png';
+
+// Import New Sections
+import HowIWork from '../components/sections/about/HowIWork.astro';
+import WhatIBelieve from '../components/sections/about/WhatIBelieve.astro';
+import Qualifications from '../components/sections/about/Qualifications.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+		<title>About | Mayan K Wellness</title>
+	</head>
+	<body class="antialiased font-sans bg-white overflow-x-hidden relative flex flex-col">
+		
+        <!-- HERO SECTION WRAPPER -->
+        <div class="relative w-full min-h-[100svh] bg-[#d4c3b3] flex flex-col overflow-hidden">
+            <!-- HEADER / NAVBAR -->
+            <header id="about-header" class="fixed top-0 left-0 w-full z-50 pt-[42px] pb-6 transition-all duration-300">
+                <div class="max-w-[1400px] mx-auto px-10 lg:px-[60px] flex items-center justify-between">
+                    
+                    <!-- Left Navigation -->
+                    <nav class="hidden md:flex items-center gap-[34px] text-[13.5px] font-medium text-[#3b3b3b] tracking-wide">
+                        <a href="/" class="hover:text-gray-500 transition-colors">Home</a>
+                        <a href="/about" class="hover:text-gray-500 transition-colors">About</a>
+                        <a href="/services" class="hover:text-gray-500 transition-colors">Services</a>
+                        <a href="/journal" class="hover:text-gray-500 transition-colors">Journal</a>
+                    </nav>
+
+                    <!-- Center Logo -->
+                    <div class="absolute left-1/2 -translate-x-1/2">
+                        <a href="/" class="block text-[#2c2c2c] hover:opacity-70 transition-opacity">
+                            <Logo id="header-logo" size={54} class="text-[#2c2c2c]" />
+                        </a>
+                    </div>
+
+                    <!-- Right Actions -->
+                    <div class="flex items-center">
+                        <Button href="/contact" variant="primary" className="!px-7 !py-[13px] !text-[13px] font-medium bg-[#995531] opacity-90 text-white hover:bg-[#854322] border-none">
+                            Begin Your Journey
+                        </Button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- MAIN LAYOUT STRUCTURE -->
+            <main class="flex-grow w-full max-w-[1400px] mx-auto px-10 lg:px-[60px] relative flex flex-col justify-center pb-24">
+                
+                <div class="w-full lg:w-1/2 flex flex-col relative z-20 mt-6 lg:mt-12">
+                    
+                    <!-- Small pill badge -->
+                    <div>
+                        <span class="inline-block bg-[#995531] text-white text-[12px] font-medium tracking-wide rounded-full px-5 py-[6px] mb-9">
+                            About me
+                        </span>
+                    </div>
+
+                    <!-- Large headline -->
+                    <h1 class="font-serif text-[72px] lg:text-[88px] leading-[0.98] tracking-[-0.02em] text-[#2c3338] mb-9 font-normal">
+                        It started and<br/>
+                        ended with<br/>
+                        <span class="text-[#b56733]">burnout.</span>
+                    </h1>
+
+                    <!-- Paragraph text -->
+                    <div class="space-y-[22px] text-[#55524d] text-[15px] font-light leading-[1.65] max-w-[390px]">
+                        <p>
+                            I was a consultant working 60-hour weeks and calling it ambition. One morning I woke up and couldn't get out of bed. Not from exhaustion, from emptiness.
+                        </p>
+                        <p>
+                            I'd built the career, the house, the whole thing, and felt nothing. It took falling apart to figure out what actually mattered. Now I help other people skip the falling apart bit.
+                        </p>
+                    </div>
+
+                    <!-- Signature text -->
+                    <div class="mt-12">
+                        <span class="font-script text-[84px] leading-none text-[#2b2b2b] ml-1 opacity-90">
+                            Maya
+                        </span>
+                    </div>
+                    
+                </div>
+                
+            </main>
+
+            <!-- RIGHT SIDE IMAGE (Silhoutte anchored bottom right) -->
+            <div class="absolute bottom-0 right-0 w-[58%] h-[85vh] pointer-events-none z-10 overflow-hidden hidden md:block">
+                <Image
+                    src={aboutImage}
+                    alt="Mayan K silhouette leaning forward"
+                    class="absolute bottom-0 right-[-5%] w-[110%] h-[110%] object-cover object-[center_top] mix-blend-multiply opacity-95"
+                    format="webp"
+                />
+            </div>
+        </div>
+
+        <!-- NEW SECTIONS -->
+        <HowIWork />
+        <WhatIBelieve />
+        <Qualifications />
+        <Footer />
+
+        <script is:inline>
+            (function () {
+                var header = document.getElementById('about-header');
+                function onScroll() {
+                    if (window.scrollY > 50) {
+                        header.style.background = 'rgba(252, 251, 248, 0.96)';
+                        header.style.backdropFilter = 'blur(12px)';
+                        header.style.WebkitBackdropFilter = 'blur(12px)';
+                        header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.04)';
+                        header.style.paddingTop = '20px';
+                        header.style.paddingBottom = '20px';
+                    } else {
+                        header.style.background = 'transparent';
+                        header.style.backdropFilter = 'none';
+                        header.style.WebkitBackdropFilter = 'none';
+                        header.style.boxShadow = 'none';
+                        header.style.paddingTop = '42px';
+                        header.style.paddingBottom = '24px';
+                    }
+                }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+            })();
+        </script>
+	</body>
+</html>

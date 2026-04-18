@@ -1,0 +1,62 @@
+---
+import Button from '../ui/Button.astro';
+import Logo from '../common/Logo.astro';
+---
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 text-white">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-7 flex items-center justify-between">
+    
+    <!-- Left Navigation -->
+    <nav class="hidden md:flex items-center gap-7 text-[15px] font-light tracking-wide">
+      <a href="/" class="nav-link transition-colors hover:opacity-70">Home</a>
+      <a href="/about" class="nav-link transition-colors hover:opacity-70">About</a>
+      <a href="/services" class="nav-link transition-colors hover:opacity-70">Services</a>
+      <a href="/journal" class="nav-link transition-colors hover:opacity-70">Journal</a>
+    </nav>
+
+    <!-- Center Logo -->
+    <div class="absolute left-1/2 -translate-x-1/2 mt-1">
+      <a href="/" class="block hover:opacity-80 transition-opacity">
+        <Logo id="header-logo" size={56} class="transition-colors duration-300 text-white/90" />
+      </a>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center">
+      <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[13px] tracking-wide">Begin Your Journey</Button>
+    </div>
+
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var header = document.getElementById('site-header');
+    var logo = document.getElementById('header-logo');
+    var navLinks = document.querySelectorAll('.nav-link');
+    var heroHeight = window.innerHeight * 0.6;
+
+    function onScroll() {
+      var scrolled = window.scrollY > heroHeight;
+
+      if (scrolled) {
+        header.style.background = 'rgba(253, 250, 245, 0.97)';
+        header.style.backdropFilter = 'blur(14px)';
+        header.style.WebkitBackdropFilter = 'blur(14px)';
+        header.style.boxShadow = '0 1px 24px rgba(0,0,0,0.06)';
+        if (logo) { logo.style.color = '#9c512c'; }
+        navLinks.forEach(function(link) { link.style.color = '#2c2c2c'; });
+      } else {
+        header.style.background = 'transparent';
+        header.style.backdropFilter = 'none';
+        header.style.WebkitBackdropFilter = 'none';
+        header.style.boxShadow = 'none';
+        if (logo) { logo.style.color = 'rgba(255,255,255,0.9)'; }
+        navLinks.forEach(function(link) { link.style.color = 'white'; });
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>

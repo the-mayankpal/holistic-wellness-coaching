@@ -1,0 +1,54 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  typeBadge: string;
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+}
+
+const { typeBadge, title, price, description, features } = Astro.props;
+---
+
+<div class="relative bg-[#f1ebd9] rounded-[1.5rem] p-8 lg:p-11 flex flex-col h-full shadow-sm transition-all duration-300 hover:shadow-md border border-[#e4dcce]/30 hover:-translate-y-1">
+  
+  <!-- Overlapping Absolute Badge -->
+  <div class="absolute -top-[14px] right-6 lg:right-10 bg-[#9c512c] text-white text-[12px] font-medium px-[1.1rem] py-[5px] rounded-full shadow-sm tracking-wide">
+    {typeBadge}
+  </div>
+
+  <!-- Header Section -->
+  <div class="flex flex-col mb-8">
+    <h3 class="text-[#2c2c2c] text-[22px] font-medium mb-3 tracking-tight">{title}</h3>
+    <div class="text-[44px] md:text-[48px] text-[#2c2c2c] leading-none mb-5 tracking-tighter shrink-0">{price}</div>
+    <p class="text-[#646464] text-[15px] font-light leading-[1.6] min-h-[50px]">
+      {description}
+    </p>
+  </div>
+
+  <!-- Global Full-Width Button -->
+  <div class="mb-10 w-full flex">
+    <Button href="/checkout" variant="primary" class="w-full text-center justify-center">
+      Begin Your Journey
+    </Button>
+  </div>
+
+  <!-- Features Container -->
+  <div class="flex flex-col flex-grow">
+    <span class="text-[#646464] text-[14px] mb-5 tracking-wide">What's included:</span>
+    <ul class="flex flex-col gap-4">
+      {features.map(feature => (
+        <li class="flex items-start gap-3">
+          <svg class="w-[20px] h-[20px] shrink-0 mt-[2px]" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="12" fill="#9c512c"/>
+            <path d="M16.5 8L10 14.5L7.5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="text-[#444] text-[14.5px] font-medium leading-[1.4] tracking-tight text-[#3b3b3b]">{feature}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,299 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Button from '../components/ui/Button.astro';
+import Footer from '../components/layout/Footer.astro';
+import Logo from '../components/common/Logo.astro';
+
+// Import newly generated images for journal
+import imgBurnout from '../assets/images/services/journal_burnout_woman_1776547684317.png';
+import imgStress from '../assets/images/services/journal_stress_woman_1776547699202.png';
+import imgRest from '../assets/images/services/journal_rest_woman_1776547717375.png';
+import imgMindfulness from '../assets/images/services/journal_mindfulness_1776548196399.png';
+import imgNutrition from '../assets/images/services/journal_nutrition_1776548215023.png';
+import imgBoundaries from '../assets/images/services/journal_boundaries_1776548232811.png';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+		<title>Journal | Mayan K Wellness</title>
+	</head>
+	<body class="antialiased font-sans bg-white overflow-x-hidden relative flex flex-col">
+		
+        <!-- HERO SECTION -->
+        <div class="relative w-full flex flex-col justify-start" style="background-color: #f4ebd9; padding-top: 154px; padding-bottom: 120px;">
+            
+            <!-- NAVBAR -->
+            <header id="journal-header" class="fixed top-0 left-0 w-full z-50 pt-8 pb-5 transition-all duration-300">
+                <div class="max-w-7xl mx-auto px-8 lg:px-12 flex items-center justify-between relative">
+                    
+                    <!-- Left Navigation -->
+                    <nav class="hidden md:flex items-center gap-8 text-[13.5px] font-medium tracking-wide" style="color: #2c2c2c;">
+                        <a href="/" class="transition-colors hover:opacity-75">Home</a>
+                        <a href="/about" class="transition-colors hover:opacity-75">About</a>
+                        <a href="/services" class="transition-colors hover:opacity-75">Services</a>
+                        <a href="/journal" class="transition-colors hover:opacity-75">Journal</a>
+                    </nav>
+
+                    <!-- Center Logo -->
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-1">
+                        <a href="/" class="block hover:opacity-70 transition-opacity" style="color: #2c2c2c;">
+                            <Logo id="header-logo" size={54} />
+                        </a>
+                    </div>
+
+                    <!-- Right Actions -->
+                    <div class="flex items-center">
+                        <Button href="/contact" variant="primary" className="!px-7 !py-3 !text-sm font-medium opacity-95 shadow-sm border-none" style="background-color: #9c512c; color: white;">
+                            Begin Your Journey
+                        </Button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- HERO CONTENT -->
+            <main class="w-full flex flex-col items-center justify-center text-center px-6 relative z-20" style="padding-top: 40px;">
+                
+                <!-- Badge -->
+                <span class="inline-block font-medium tracking-wide rounded-full shadow-sm" style="background-color: #9c512c; color: white; padding: 6px 20px; font-size: 12px; margin-bottom: 28px;">
+                    Journal
+                </span>
+                
+                <!-- Headline -->
+                <h1 class="font-serif font-normal" style="color: #2c3338; font-size: 72px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 24px;">
+                    Writing from the<br/>
+                    <span style="color: #bc6b3c; font-style: italic;">other side</span> of burnout.
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="font-light" style="color: #55524d; font-size: 16px; line-height: 1.65; max-width: 440px;">
+                    Honest writing about the things I see in my<br class="hidden md:block"/>
+                    practice and the lessons I keep coming back to.
+                </p>
+                
+            </main>
+        </div>
+
+        <!-- JOURNAL FEED SECTION -->
+        <section class="w-full relative flex flex-col items-center px-6" style="background-color: #fcfbfa; padding-top: 80px; padding-bottom: 120px;">
+            <div class="w-full" style="max-width: 1140px;">
+                
+                <!-- Filter Pills -->
+                <div class="flex items-center gap-3" style="margin-bottom: 40px;">
+                    <span class="inline-block" style="background-color: #9c512c; color: white; padding: 7px 22px; border-radius: 9999px; font-size: 13px; font-medium; box-shadow: 0 4px 10px rgba(156,81,44,0.15);">
+                        All
+                    </span>
+                </div>
+
+                <!-- Articles Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full text-left" style="gap: 28px;">
+                    
+                    <!-- Card 1 -->
+                    <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgBurnout} alt="Burnout" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Burnout
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                The difference between tired and burned out
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                Everyone says they're burned out. But there's a real difference between needing a weekend off and needing to fundamentally change how you're living.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Mar 28, 2025 <span class="mx-2">&bull;</span> 6 min read
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgStress} alt="Stress" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Stress
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                Your body keeps the score even when you're fine
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                Stress doesn't always look like stress. Sometimes it shows up as a stiff neck, a short temper, or a 3am wake-up you can't explain.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Mar 21, 2025 <span class="mx-2">&bull;</span> 5 min read
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgRest} alt="Rest" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Self-care
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                Why "just rest" is terrible advice
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                Rest isn't one thing. There are at least seven types, and most people are only getting one of them.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Mar 14, 2025 <span class="mx-2">&bull;</span> 4 min read
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 (Hidden Initially) -->
+                    <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgMindfulness} alt="Mindfulness" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Mindfulness
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                You don't need to meditate for an hour
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                The wellness industry makes mindfulness feel like a performance. It doesn't have to be. Here's what actually works for people with busy lives.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Mar 7, 2025 <span class="mx-2">&bull;</span> 4 min read
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 (Hidden Initially) -->
+                    <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgNutrition} alt="Nutrition" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Nutrition
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                What I actually eat in a day
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                Tracking macros made me miserable. Here's the simpler approach that actually stuck.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Feb 28, 2025 <span class="mx-2">&bull;</span> 5 min read
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 (Hidden Initially) -->
+                    <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            <Image src={imgBoundaries} alt="Boundaries" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                Stress
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                Setting boundaries doesn't make you difficult
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                Most of my clients feel guilty about boundaries. Here's what I tell them.
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                Feb 14, 2025 <span class="mx-2">&bull;</span> 5 min read
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Load More Button -->
+                <div class="w-full flex justify-center" style="margin-top: 60px;">
+                    <button id="load-more-btn" style="background-color: #9c512c; color: white; padding: 11px 32px; border-radius: 9999px; font-size: 13px; font-weight: 500; border: none; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                        Load More
+                    </button>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="w-full flex flex-col md:flex-row items-center justify-between" style="background-color: #f4ebd9; border-radius: 16px; padding: 44px 50px; margin-top: 100px;">
+                    
+                    <!-- Text Area (Left) -->
+                    <div class="text-left mb-6 md:mb-0 max-w-lg">
+                        <h3 class="font-medium" style="color: #2c3338; font-size: 26px; letter-spacing: -0.02em; margin-bottom: 6px;">
+                            Get new posts straight to your inbox.
+                        </h3>
+                        <p class="font-light" style="color: #635f5a; font-size: 15px;">
+                            No spam, no fluff. Just honest writing when I have something worth sharing.
+                        </p>
+                    </div>
+
+                    <!-- Input Area (Right) -->
+                    <div style="background-color: white; border-radius: 9999px; padding: 6px 6px 6px 24px; display: flex; align-items: center; width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                        <input type="email" placeholder="Enter your email" class="font-light w-full" style="background: transparent; border: none; outline: none; font-size: 14.5px; color: #555; font-family: 'Inter', sans-serif;" />
+                        <button style="background-color: #9c512c; color: white; padding: 12px 32px; border-radius: 9999px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; white-space: nowrap; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                            Subscribe
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <Footer />
+
+        <!-- STICKY HEADER & LOAD MORE SCRIPT -->
+        <script is:inline>
+            (function () {
+                var header = document.getElementById('journal-header');
+                function onScroll() {
+                    if (window.scrollY > 50) {
+                        header.style.background = 'rgba(244, 235, 217, 0.96)';
+                        header.style.backdropFilter = 'blur(12px)';
+                        header.style.WebkitBackdropFilter = 'blur(12px)';
+                        header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.03)';
+                        header.style.paddingTop = '18px';
+                        header.style.paddingBottom = '18px';
+                    } else {
+                        header.style.background = 'transparent';
+                        header.style.backdropFilter = 'none';
+                        header.style.WebkitBackdropFilter = 'none';
+                        header.style.boxShadow = 'none';
+                        header.style.paddingTop = '32px';
+                        header.style.paddingBottom = '24px';
+                    }
+                }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+
+                // Load More Logic
+                var loadMoreBtn = document.getElementById('load-more-btn');
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', function() {
+                        var hiddenCards = document.querySelectorAll('.hidden-card');
+                        hiddenCards.forEach(function(card) {
+                            card.style.display = 'flex';
+                        });
+                        loadMoreBtn.style.display = 'none';
+                    });
+                }
+            })();
+        </script>
+	</body>
+</html>

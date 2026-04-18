@@ -1,0 +1,74 @@
+---
+import Button from '../ui/Button.astro';
+import ServiceCard from '../ui/ServiceCard.astro';
+
+import stressImg from '../../assets/images/services/stress.png';
+import burnoutImg from '../../assets/images/services/burnout.png';
+import transitionsImg from '../../assets/images/services/transitions.png';
+import mindfulnessImg from '../../assets/images/services/mindfulness.png';
+
+const services = [
+  {
+    title: "Stress & Anxiety",
+    description: "Gentle practices to calm your mind, ease tension, and bring you back.",
+    imageSrc: stressImg
+  },
+  {
+    title: "Burnout Recovery",
+    description: "Rebuild your energy and rediscover your purpose without burning it all down.",
+    imageSrc: burnoutImg
+  },
+  {
+    title: "Life Transitions",
+    description: "Support through career shifts, loss, and the in-between moments.",
+    imageSrc: transitionsImg
+  },
+  {
+    title: "Mindfulness Tech",
+    description: "Practical techniques you can actually use, even on your worst days.",
+    imageSrc: mindfulnessImg
+  }
+];
+---
+
+<section id="services" class="w-full bg-[#f8f5ee] py-24 lg:py-32">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+    
+    <!-- Header Content -->
+    <div class="flex flex-col items-center text-center max-w-4xl mx-auto mb-16 lg:mb-20">
+      
+      <!-- Pill Badge -->
+      <span class="inline-block bg-[#ebe7df] text-[#4a4a4a] text-[13px] font-medium px-5 py-[6px] rounded-full mb-8 font-sans tracking-wide">
+        Services
+      </span>
+
+      <!-- Headline -->
+      <h2 class="font-sans text-[42px] md:text-[52px] font-normal tracking-tight text-[#2c2c2c] mb-6 leading-[1.1] md:whitespace-nowrap">
+        Guiding you back to <span class="text-[#9c512c]">balance.</span>
+      </h2>
+
+      <!-- Subheadline -->
+      <p class="text-[17.5px] text-[#555] font-light leading-[1.6] mb-10 max-w-lg mx-auto">
+        Four key areas where gentle guidance and proven techniques create lasting transformation.
+      </p>
+
+      <!-- Action -->
+      <Button variant="primary" href="/services">
+        Explore Services
+      </Button>
+
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map(service => (
+        <ServiceCard 
+          title={service.title}
+          description={service.description}
+          imageSrc={service.imageSrc}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import Button from '../../ui/Button.astro';
+import Logo from '../../common/Logo.astro';
+---
+
+<section class="w-full bg-[#FAF7F2] py-[100px] md:py-[140px] px-6 text-center flex flex-col items-center">
+    
+    <!-- Geometric Logo Detail -->
+    <div class="mb-8 opacity-80">
+        <Logo id="cta-logo" size={64} class="text-[#2c2c2c]" />
+    </div>
+
+    <!-- Title -->
+    <h2 class="font-sans font-medium text-[44px] md:text-[56px] leading-[1.05] tracking-[-0.03em] text-[#282725] mb-5">
+        You deserve to feel like<br />
+        <span class="text-[#A26442]">yourself</span> again.
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="text-[#68625d] text-[15px] md:text-[16px] font-light max-w-[420px] mx-auto leading-[1.65] mb-10">
+        Book a free discovery call and let's talk<br />
+        about what's weighing you down.
+    </p>
+
+    <!-- CTA Button -->
+    <Button href="/contact" variant="primary" className="!px-9 !py-[16px] !text-[14px] font-medium bg-[#995531] opacity-95 text-white hover:bg-[#854322] border-none shadow-[0_4px_14px_rgba(153,85,49,0.2)] hover:-translate-y-[2px] transition-all">
+        Begin Your Journey
+    </Button>
+
+</section>

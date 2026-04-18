@@ -1,0 +1,73 @@
+---
+import ProgramCard from '../ui/ProgramCard.astro';
+
+const programs = [
+  {
+    title: "Calm Collective",
+    typeBadge: "Group Program",
+    price: "$899",
+    description: "Learn alongside others while receiving individual guidance tailored to you.",
+    features: [
+      "8 Weekly Group Calls (Max 6 People)",
+      "Private Community Access",
+      "Two 1:1 Check-Ins",
+      "Meditation Library",
+      "Weekly Exercises",
+      "3 Months Extended Access"
+    ]
+  },
+  {
+    title: "Reset & Restore",
+    typeBadge: "1:1 Premium",
+    price: "$2,999",
+    description: "Deep, personalized work to completely transform your relationship with stress.",
+    features: [
+      "12 Weekly 1-Hour Sessions",
+      "Personalized Toolkit",
+      "Custom Meditation Recordings",
+      "Weekday Text Support",
+      "Sustainability Plan",
+      "Lifetime Session Recordings"
+    ]
+  }
+];
+---
+
+<section id="programs" class="w-full bg-[#fdfaf5] py-24 lg:py-32 border-t border-[#e2dacb]/40">
+  <div class="max-w-[1200px] mx-auto px-6 sm:px-10 lg:px-12">
+    
+    <!-- Top Header -->
+    <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-20 lg:mb-24">
+      
+      <!-- Pill Badge -->
+      <span class="inline-block bg-[#f4ebd9] text-[#4a4a4a] text-[13px] font-medium px-[1.2rem] py-[0.35rem] rounded-full mb-8 font-sans tracking-wide">
+        Programs
+      </span>
+
+      <!-- Headline -->
+      <h2 class="font-sans text-[42px] md:text-[54px] font-normal tracking-tight text-[#2c2c2c] mb-6 leading-[1.05]">
+        Find the support that fits <span class="text-[#9c512c]">your</span> life.
+      </h2>
+
+      <!-- Subheadline -->
+      <p class="text-[17px] text-[#555] font-light leading-[1.65] max-w-lg mx-auto">
+        Choose from different ways to work together, designed to meet you wherever you are in your journey.
+      </p>
+
+    </div>
+
+    <!-- 2 Column Grid for Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[960px] mx-auto">
+      {programs.map(program => (
+        <ProgramCard 
+          title={program.title}
+          typeBadge={program.typeBadge}
+          price={program.price}
+          description={program.description}
+          features={program.features}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>

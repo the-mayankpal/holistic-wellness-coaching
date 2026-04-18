@@ -1,0 +1,52 @@
+---
+interface Props {
+  quote: string;
+  authorName: string;
+  authorRole: string;
+}
+
+const { quote, authorName, authorRole } = Astro.props;
+
+// Helper to get initials
+const initials = authorName.split(' ').map(n => n[0]).join('').substring(0, 2);
+
+// Deterministic subtle gradient based on name length for avatar
+const gradients = [
+  'from-[#e2d5c8] to-[#f4ebe1]',
+  'from-[#d8cfc5] to-[#ece5dd]',
+  'from-[#eeddd3] to-[#f8eee9]',
+  'from-[#dddadd] to-[#f0eef0]'
+];
+const gradientIndex = authorName.length % gradients.length;
+const activeGradient = gradients[gradientIndex];
+---
+
+<div class="h-full bg-[#fbf9f4] rounded-[1.5rem] p-8 lg:p-10 shadow-sm border border-[#f5efe5]/50 flex flex-col transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+  
+  <!-- Subtle Oversized Quote Icon -->
+  <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" class="text-[#ede2d4] mb-4 shrink-0">
+    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+  </svg>
+
+  <!-- Quote Body -->
+  <p class="text-[#646464] text-[15px] font-light leading-[1.8] flex-grow">
+    {quote}
+  </p>
+
+  <!-- Author Block -->
+  <div class="flex items-center gap-4 mt-8 pt-4 shrink-0">
+    
+    <!-- CSS Avatar -->
+    <div class={`w-11 h-11 rounded-full flex items-center justify-center text-[#6e5d4e] text-[13px] font-medium tracking-widest bg-gradient-to-br ${activeGradient}`}>
+      {initials}
+    </div>
+
+    <!-- Author Info -->
+    <div class="flex flex-col">
+      <span class="text-[14px] font-medium text-[#2c2c2c]">{authorName}</span>
+      <span class="text-[12.5px] font-light text-[#888] tracking-widest mt-0.5">{authorRole}</span>
+    </div>
+
+  </div>
+
+</div>

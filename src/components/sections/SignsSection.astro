@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+
+// Importing the generated editorial assets
+import imgTired from '../../assets/images/services/journal_stress_woman_1776547699202.png';
+import imgCantStart from '../../assets/images/services/signs_cant_start_1776550033278.png';
+import imgFallingApart from '../../assets/images/services/signs_falling_apart_1776550048775.png';
+import imgResting from '../../assets/images/services/journal_rest_woman_1776547717375.png';
+import imgSuccessful from '../../assets/images/services/journal_burnout_woman_1776547684317.png';
+
+const signs = [
+  { text: "You're tired all the time but you can't switch off", img: imgTired },
+  { text: "You know something needs to change but can't start", img: imgCantStart },
+  { text: "You're holding it all together but quietly falling apart", img: imgFallingApart },
+  { text: "Resting feels wrong, like you should be doing more", img: imgResting },
+  { text: "Successful on paper but something still feels deeply off", img: imgSuccessful }
+];
+---
+
+<section class="w-full relative overflow-hidden" style="background-color: #fcfbfa; min-height: 100vh; padding: 160px 0; display: flex; align-items: center; justify-content: center;">
+    
+    <div class="relative w-full max-w-[1240px] flex items-center justify-center mx-auto" style="height: 700px;">
+        
+        <!-- Central Title (Fixed) -->
+        <div class="absolute z-10 text-center pointer-events-none px-4">
+            <h2 style="font-family: 'Inter', sans-serif; font-size: 72px; font-weight: 400; color: #2c3338; line-height: 1.05; letter-spacing: -0.04em;">
+                The signs that something<br/>
+                <span style="color: #9c512c;">needs</span> to change.
+            </h2>
+        </div>
+
+        <!-- Orbital Engine (CSS Driven, 0JS, Hyper-Performant) -->
+        <div class="orbit-master" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0;">
+            {signs.map((sign, i) => {
+                const angle = i * (360 / signs.length);
+                return (
+                    <div class="orbit-arm" style={`position: absolute; top: 0; left: 0; transform: rotate(${angle}deg);`}>
+                        <!-- Radius offset (Desktop 420px) -->
+                        <div class="orbit-offset" style="position: absolute; left: 420px; top: 0;">
+                            <!-- Counter-Spin engine removes the rotation imparted by the master spin over time -->
+                            <div class="orbit-counter-spin">
+                                <!-- Static offset correction removes the initial angle rotation so card stands perfectly upright -->
+                                <div style={`transform: rotate(-${angle}deg);`}>
+                                    
+                                    <!-- Actual Visible Card Render -->
+                                    <div class="sign-styled-card" style="position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; background-color: #f4ebd9; padding: 8px 28px 8px 8px; border-radius: 9999px; gap: 18px; width: max-content; max-width: 360px; box-shadow: 0 12px 30px rgba(0,0,0,0.03); pointer-events: auto; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                        
+                                        <!-- Card Image -->
+                                        <div style="width: 72px; height: 72px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                                            <Image src={sign.img} alt="Sign" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+                                        </div>
+                                        
+                                        <!-- Card Text -->
+                                        <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #3b3631; line-height: 1.45; margin: 0; text-align: left; padding-right: 8px;">
+                                            {sign.text}
+                                        </p>
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+
+    </div>
+
+    <!-- Injecting styles cleanly in the Astro block -->
+    <style>
+        /* Orbital Mathematics */
+        .orbit-master {
+            animation: masterSpin 45s linear infinite;
+        }
+        .orbit-counter-spin {
+            animation: counterSpin 45s linear infinite;
+        }
+
+        @keyframes masterSpin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes counterSpin {
+            100% { transform: rotate(-360deg); }
+        }
+
+        /* Interactive Hover Pause - Premium Polish */
+        .orbit-master:hover,
+        .orbit-master:hover .orbit-counter-spin {
+            animation-play-state: paused;
+        }
+
+        /* Hover effect on cards */
+        .sign-styled-card:hover {
+            transform: translate(-50%, -50%) scale(1.03) !important;
+            box-shadow: 0 16px 40px rgba(156, 81, 44, 0.08) !important;
+        }
+
+        /* Small Screen Safeties */
+        @media (max-width: 1024px) {
+            .orbit-offset { left: 340px !important; }
+            h2 { font-size: 56px !important; }
+            .sign-styled-card { max-width: 300px !important; padding: 6px 20px 6px 6px !important; gap: 12px !important; }
+            .sign-styled-card > div { width: 56px !important; height: 56px !important; }
+            .sign-styled-card p { font-size: 12.5px !important; }
+        }
+
+        @media (max-width: 768px) {
+            .orbit-offset { left: 240px !important; }
+            h2 { font-size: 40px !important; }
+            .sign-styled-card { max-width: 260px !important; gap: 10px !important; }
+            .sign-styled-card > div { width: 44px !important; height: 44px !important; }
+            .sign-styled-card p { font-size: 11px !important; }
+        }
+    </style>
+</section>

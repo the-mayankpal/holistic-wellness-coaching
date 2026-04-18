@@ -1,0 +1,23 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+  id?: string;
+}
+const { size = 52, class: className = '', id } = Astro.props;
+---
+
+<svg 
+  id={id}
+  width={size} 
+  height={size} 
+  viewBox="0 0 48 48" 
+  fill="none" 
+  class={className}
+>
+  <circle cx="24" cy="19" r="8.5" stroke="currentColor" stroke-width="1.5" />
+  <circle cx="24" cy="29" r="8.5" stroke="currentColor" stroke-width="1.5" />
+  <circle cx="19" cy="24" r="8.5" stroke="currentColor" stroke-width="1.5" />
+  <circle cx="29" cy="24" r="8.5" stroke="currentColor" stroke-width="1.5" />
+  <rect x="22.5" y="22.5" width="3" height="3" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(45 24 24)" />
+</svg>

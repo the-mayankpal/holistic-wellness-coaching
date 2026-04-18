@@ -1,0 +1,120 @@
+---
+import Button from '../ui/Button.astro';
+import TestimonialCard from '../ui/TestimonialCard.astro';
+
+const testimonials = [
+  {
+    quote: "I used to lie awake replaying work conversations. Now I actually sleep through the night. Maya helped me find calm in the chaos.",
+    authorName: "Sarah Silos",
+    authorRole: "Marketing Director"
+  },
+  {
+    quote: "Going through my divorce felt impossible while managing everything else. Maya helped me rebuild my confidence and create space for what truly mattered in my life which helped both myself and my family.",
+    authorName: "Elena Azalea",
+    authorRole: "Marketing Director"
+  },
+  {
+    quote: "I thought burnout was just part of entrepreneurship. Maya taught me that boundaries actually make you more effective.",
+    authorName: "Mika Wazowski",
+    authorRole: "Sales Manager"
+  },
+  {
+    quote: "I was drowning in stress from travel and deadlines. Maya's simple breathing techniques changed everything.",
+    authorName: "Alex Morgan",
+    authorRole: "Startup Founder"
+  },
+  {
+    quote: "I used to feel guilty taking breaks. Maya showed me that rest isn't laziness, it's necessary for creativity and focus.",
+    authorName: "James Wilson",
+    authorRole: "Freelance Designer"
+  },
+  {
+    quote: "Maya's techniques actually work during crazy busy days at the office. I finally have practical tools that fit into real life, not just theory.",
+    authorName: "Priya Patel",
+    authorRole: "Nurse"
+  }
+];
+
+const features = ["Amsterdam", "venice.", "Hamilton", "CALIFORNIA", "Amsterdam"];
+---
+
+<section id="testimonials" class="w-full bg-[#f5efe5] py-24 pb-32">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+    
+    <!-- Top Header -->
+    <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-20 lg:mb-24">
+      
+      <!-- Pill Badge -->
+      <span class="inline-block bg-[#efeae0] text-[#4a4a4a] text-[13px] font-medium px-5 py-[6px] rounded-full mb-8 font-sans tracking-wide">
+        Real stories
+      </span>
+
+      <!-- Headline -->
+      <h2 class="font-sans text-[42px] md:text-[56px] font-normal tracking-tight text-[#2c2c2c] mb-6 leading-[1.05]">
+        You are <span class="text-[#9c512c]">not</span> alone in this.
+      </h2>
+
+      <!-- Subheadline -->
+      <p class="text-[17.5px] text-[#555] font-light leading-[1.6] mb-10 max-w-lg mx-auto">
+        Hear from others who've made the journey from overwhelmed to feeling like themselves again.
+      </p>
+
+      <!-- Action -->
+      <Button variant="primary" href="/contact">
+        Begin Your Journey
+      </Button>
+
+    </div>
+
+    <!-- Strict 3x2 Grid Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-32 items-stretch">
+      {testimonials.map(t => (
+        <TestimonialCard 
+          quote={t.quote}
+          authorName={t.authorName}
+          authorRole={t.authorRole}
+        />
+      ))}
+    </div>
+
+    <!-- Featured In Block -->
+    <div class="flex flex-col items-center pt-24 pb-12 overflow-hidden w-full relative">
+      
+      <!-- Pill Badge -->
+      <span class="inline-block bg-white text-[#555] text-[13px] font-medium px-[1.2rem] py-[0.4rem] rounded-full mb-10 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-black/5 tracking-wide">
+        Featured in
+      </span>
+
+      <!-- Infinite Marquee container -->
+      <div class="relative flex overflow-hidden w-full max-w-[1200px] mask-edges">
+        <div class="flex w-max animate-marquee items-center opacity-80 hover:opacity-100 transition-opacity duration-500 text-[#cca98e]">
+          
+          <!-- Track Content (Original) -->
+          <div class="flex items-center justify-around w-max gap-16 md:gap-24 lg:gap-32 pr-16 md:pr-24 lg:pr-32">
+            <span class="font-sans text-[24px] md:text-[30px] font-light tracking-tight flex items-center gap-[6px]">
+              <!-- Custom minimalist asterisk mimicking the Hamilton logo -->
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3v18M4 9l16 6M4 15l16-6"/></svg>
+              Hamilton
+            </span>
+            <span class="font-sans font-bold text-[22px] md:text-[26px] tracking-[0.1em] uppercase">C&Lambda;LIFORNI&Lambda;</span>
+            <span class="font-sans font-semibold text-[26px] md:text-[32px] tracking-tight">Amsterdam</span>
+            <span class="font-serif font-bold text-[32px] md:text-[38px] tracking-tighter lowercase">venice.</span>
+          </div>
+
+          <!-- Track Content (Duplicate for infinite cycle) -->
+          <div class="flex items-center justify-around w-max gap-16 md:gap-24 lg:gap-32 pr-16 md:pr-24 lg:pr-32">
+            <span class="font-sans text-[24px] md:text-[30px] font-light tracking-tight flex items-center gap-[6px]">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3v18M4 9l16 6M4 15l16-6"/></svg>
+              Hamilton
+            </span>
+            <span class="font-sans font-bold text-[22px] md:text-[26px] tracking-[0.1em] uppercase">C&Lambda;LIFORNI&Lambda;</span>
+            <span class="font-sans font-semibold text-[26px] md:text-[32px] tracking-tight">Amsterdam</span>
+            <span class="font-serif font-bold text-[32px] md:text-[38px] tracking-tighter lowercase">venice.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
