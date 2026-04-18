@@ -1,9 +1,15 @@
 ---
 import Button from '../ui/Button.astro';
 import Logo from '../common/Logo.astro';
+
+interface Props {
+  theme?: 'dark' | 'light';
+}
+
+const { theme = 'dark' } = Astro.props;
 ---
 
-<header id="site-header" class="site-header">
+<header id="site-header" class={`site-header ${theme === 'light' ? 'theme-light' : ''}`} data-theme={theme}>
   <div class="header-inner">
     
     <!-- Logo (always visible, left on mobile, center on desktop) -->
@@ -212,6 +218,17 @@ import Logo from '../common/Logo.astro';
   .site-header.menu-open .hamburger-btn {
     color: #2c2c2c;
   }
+
+  /* ===== LIGHT THEME (inner pages with light backgrounds) ===== */
+  .site-header.theme-light .header-logo-link {
+    color: #9c512c;
+  }
+  .site-header.theme-light .desktop-nav {
+    color: #2c2c2c;
+  }
+  .site-header.theme-light .hamburger-btn {
+    color: #2c2c2c;
+  }
 </style>
 
 <script is:inline>
@@ -220,7 +237,8 @@ import Logo from '../common/Logo.astro';
     var logo = document.getElementById('header-logo');
     var toggleBtn = document.getElementById('mobile-menu-toggle');
     var dropdown = document.getElementById('mobile-dropdown');
-    var heroHeight = window.innerHeight * 0.6;
+    var theme = header.getAttribute('data-theme');
+    var heroHeight = theme === 'light' ? 50 : window.innerHeight * 0.6;
     var isOpen = false;
 
     function openMenu() {

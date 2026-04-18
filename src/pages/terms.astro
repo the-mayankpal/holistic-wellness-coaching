@@ -1,199 +1,89 @@
 ---
-import '../styles/global.css';
-import Button from '../components/ui/Button.astro';
-import Footer from '../components/layout/Footer.astro';
-import Logo from '../components/common/Logo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-		<title>Terms of Service | Mayan K Wellness</title>
-	</head>
-	<body class="antialiased overflow-x-hidden relative flex flex-col m-0 p-0" style="background-color: #fdfbfa; font-family: 'Inter', sans-serif;">
-		
-        <!-- NAVBAR -->
-        <header id="site-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; padding-top: 32px; padding-bottom: 24px; transition: all 0.3s ease; background-color: #fdfbfa;">
-            <div style="max-width: 1280px; margin: 0 auto; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; position: relative;">
-                
-                <nav style="display: flex; align-items: center; gap: 32px; font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em; color: #2c2c2c;">
-                    <a href="/" style="text-decoration: none; color: inherit;">Home</a>
-                    <a href="/about" style="text-decoration: none; color: inherit;">About</a>
-                    <a href="/services" style="text-decoration: none; color: inherit;">Services</a>
-                    <a href="/journal" style="text-decoration: none; color: inherit;">Journal</a>
-                </nav>
+<BaseLayout title="Terms of Service | Mayan K Wellness" headerTheme="light">
 
-                <div style="position: absolute; left: 50%; transform: translateX(-50%); mt-1;">
-                    <a href="/" style="text-decoration: none; color: #2c2c2c;">
-                        <Logo id="header-logo" size={54} />
-                    </a>
-                </div>
-
-                <div style="display: flex; align-items: center;">
-                    <a href="/contact" style="background-color: #9c512c; color: white; padding: 12px 28px; border-radius: 9999px; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        Begin Your Journey
-                    </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- MAIN LAYOUT -->
-        <main style="width: 100%; display: flex; justify-content: center; padding: 160px 24px 100px 24px; box-sizing: border-box;">
+    <!-- MAIN LAYOUT -->
+    <main style="width: 100%; display: flex; justify-content: center; padding: 160px 24px 100px 24px; box-sizing: border-box;">
+        
+        <!-- Terms Content Container -->
+        <div style="background-color: #f4ebd9; border-radius: 16px; padding: 72px 80px; width: 100%; max-width: 820px; box-sizing: border-box;">
             
-            <!-- Terms Content Container -->
-            <div style="background-color: #f4ebd9; border-radius: 16px; padding: 72px 80px; width: 100%; max-width: 820px; box-sizing: border-box;">
-                
-                <h1 style="font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 500; color: #2c3338; margin-top: 0; margin-bottom: 48px; letter-spacing: -0.02em;">
-                    Terms of Service
-                </h1>
+            <h1 style="font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 500; color: #2c3338; margin-top: 0; margin-bottom: 48px; letter-spacing: -0.02em;">
+                Terms of Service
+            </h1>
 
-                <!-- Section 1 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Agreement</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        By accessing this website or purchasing coaching services from [Your Name], (acting as [Your Business Name]), you agree to these terms. If you do not agree, please do not use this website or purchase services.
-                    </p>
-                </div>
-
-                <!-- Section 2 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Coaching services</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        The coaching services offered through this website are for educational and personal development purposes. I am a certified wellness coach, not a licensed therapist, psychologist, or medical professional.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        Coaching is not a substitute for professional medical advice, diagnosis, or treatment. If you are experiencing a medical or mental health emergency, please contact your local emergency services or a healthcare provider.
-                    </p>
-                </div>
-
-                <!-- Section 3 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Booking and payment</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        Discovery calls are free of charge and can be booked through the scheduling tool on this website.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        Paid sessions and programmes are billed as described on the Services page. Payment is due at the time of booking unless otherwise agreed.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        All prices are listed in [currency] and are inclusive of applicable taxes unless otherwise stated.
-                    </p>
-                </div>
-
-                <!-- Section 4 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Cancelation and rescheduling</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        I ask for at least 24 hours notice if you need to cancel or reschedule a session. Cancellations made with less than 24 hours notice may be charged in full.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        If I need to cancel or reschedule a session, I will give you as much notice as possible and offer an alternative time.
-                    </p>
-                </div>
-
-                <!-- Section 5 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Refunds</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        <strong>Self-paced programmes:</strong> Due to the digital nature of these products, refunds are not available once access has been granted.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        <strong>Group programmes:</strong> A full refund is available if you withdraw within 7 days of purchase, provided the programme has not yet started. Once the programme has started, refunds are not available.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        <strong>1:1 coaching packages:</strong> A pro-rated refund may be available for unused sessions if you wish to discontinue coaching. This is assessed on a case-by-case basis.
-                    </p>
-                </div>
-
-                <!-- Section 6 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Confidentiality</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        Everything discussed during coaching sessions is confidential. I will not share your personal information or session content with anyone without your explicit consent, except where I am legally required to do so (for example, if there is a risk of harm to yourself or others).
-                    </p>
-                </div>
-
-                <!-- Section 7 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Intellectual property</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        All content on this website, including text, images, graphics, and design, is owned by [Your Name] and is protected by copyright law. You may not reproduce, distribute, or use any content from this website without written permission.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        Materials provided as part of coaching programmes (worksheets, guides, resources) are for your personal use only and may not be shared or redistributed.
-                    </p>
-                </div>
-
-                <!-- Section 8 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Limitation of liability</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
-                        Coaching is a collaborative process and results vary depending on individual circumstances and effort. I do not guarantee specific outcomes from coaching services.
-                    </p>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        To the fullest extent permitted by law, I am not liable for any indirect, incidental, or consequential damages arising from your use of this website or coaching services.
-                    </p>
-                </div>
-
-                <!-- Section 9 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Governing law</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        These terms are governed by the laws of [your jurisdiction]. Any disputes will be resolved in the courts of [your jurisdiction].
-                    </p>
-                </div>
-
-                <!-- Section 10 -->
-                <div style="margin-bottom: 36px;">
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Changes to these terms</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        I may update these terms from time to time. Continued use of this website or services after changes constitutes acceptance of the updated terms.
-                    </p>
-                </div>
-
-                <!-- Section 11 -->
-                <div>
-                    <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Contact</h2>
-                    <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
-                        If you have any questions about these terms, contact me at [your@email.com].
-                    </p>
-                </div>
-
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Agreement</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
+                    By accessing this website or purchasing coaching services from [Your Name], (acting as [Your Business Name]), you agree to these terms. If you do not agree, please do not use this website or purchase services.
+                </p>
             </div>
-        </main>
 
-        <!-- FOOTER -->
-        <Footer />
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Coaching services</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">
+                    The coaching services offered through this website are for educational and personal development purposes. I am a certified wellness coach, not a licensed therapist, psychologist, or medical professional.
+                </p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">
+                    Coaching is not a substitute for professional medical advice, diagnosis, or treatment. If you are experiencing a medical or mental health emergency, please contact your local emergency services or a healthcare provider.
+                </p>
+            </div>
 
-        <!-- STICKY HEADER SCRIPT -->
-        <script is:inline>
-            (function () {
-                var header = document.getElementById('site-header');
-                function onScroll() {
-                    if (window.scrollY > 50) {
-                        header.style.background = 'rgba(253, 251, 250, 0.96)';
-                        header.style.backdropFilter = 'blur(12px)';
-                        header.style.WebkitBackdropFilter = 'blur(12px)';
-                        header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.03)';
-                        header.style.paddingTop = '18px';
-                        header.style.paddingBottom = '18px';
-                    } else {
-                        header.style.background = '#fdfbfa';
-                        header.style.backdropFilter = 'none';
-                        header.style.WebkitBackdropFilter = 'none';
-                        header.style.boxShadow = 'none';
-                        header.style.paddingTop = '32px';
-                        header.style.paddingBottom = '24px';
-                    }
-                }
-                window.addEventListener('scroll', onScroll, { passive: true });
-                onScroll();
-            })();
-        </script>
-	</body>
-</html>
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Booking and payment</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">Discovery calls are free of charge and can be booked through the scheduling tool on this website.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">Paid sessions and programmes are billed as described on the Services page. Payment is due at the time of booking unless otherwise agreed.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">All prices are listed in [currency] and are inclusive of applicable taxes unless otherwise stated.</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Cancelation and rescheduling</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">I ask for at least 24 hours notice if you need to cancel or reschedule a session. Cancellations made with less than 24 hours notice may be charged in full.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">If I need to cancel or reschedule a session, I will give you as much notice as possible and offer an alternative time.</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Refunds</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;"><strong>Self-paced programmes:</strong> Due to the digital nature of these products, refunds are not available once access has been granted.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;"><strong>Group programmes:</strong> A full refund is available if you withdraw within 7 days of purchase, provided the programme has not yet started. Once the programme has started, refunds are not available.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;"><strong>1:1 coaching packages:</strong> A pro-rated refund may be available for unused sessions if you wish to discontinue coaching. This is assessed on a case-by-case basis.</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Confidentiality</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">Everything discussed during coaching sessions is confidential. I will not share your personal information or session content with anyone without your explicit consent, except where I am legally required to do so (for example, if there is a risk of harm to yourself or others).</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Intellectual property</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">All content on this website, including text, images, graphics, and design, is owned by [Your Name] and is protected by copyright law. You may not reproduce, distribute, or use any content from this website without written permission.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">Materials provided as part of coaching programmes (worksheets, guides, resources) are for your personal use only and may not be shared or redistributed.</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Limitation of liability</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0 0 16px 0;">Coaching is a collaborative process and results vary depending on individual circumstances and effort. I do not guarantee specific outcomes from coaching services.</p>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">To the fullest extent permitted by law, I am not liable for any indirect, incidental, or consequential damages arising from your use of this website or coaching services.</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Governing law</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">These terms are governed by the laws of [your jurisdiction]. Any disputes will be resolved in the courts of [your jurisdiction].</p>
+            </div>
+
+            <div style="margin-bottom: 36px;">
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Changes to these terms</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">I may update these terms from time to time. Continued use of this website or services after changes constitutes acceptance of the updated terms.</p>
+            </div>
+
+            <div>
+                <h2 style="font-size: 18px; font-weight: 500; color: #2c3338; margin-bottom: 12px;">Contact</h2>
+                <p style="font-size: 14.5px; font-weight: 300; color: #55524d; line-height: 1.6; margin: 0;">If you have any questions about these terms, contact me at [your@email.com].</p>
+            </div>
+
+        </div>
+    </main>
+
+</BaseLayout>

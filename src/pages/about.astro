@@ -1,185 +1,73 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import Button from '../components/ui/Button.astro';
-import Logo from '../components/common/Logo.astro';
 import aboutImage from '../assets/images/aboutpageimage.png';
 
 // Import New Sections
 import HowIWork from '../components/sections/about/HowIWork.astro';
 import WhatIBelieve from '../components/sections/about/WhatIBelieve.astro';
 import Qualifications from '../components/sections/about/Qualifications.astro';
-import Footer from '../components/layout/Footer.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-		<title>About | Mayan K Wellness</title>
-	</head>
-	<body class="antialiased font-sans bg-white overflow-x-hidden relative flex flex-col">
-		
-        <!-- HERO SECTION WRAPPER -->
-        <div class="relative w-full min-h-[100svh] bg-[#d4c3b3] flex flex-col overflow-hidden">
-            <!-- HEADER / NAVBAR -->
-            <header id="about-header" class="fixed top-0 left-0 w-full z-50 pt-[42px] pb-6 transition-all duration-300">
-                <div class="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-[60px] flex items-center justify-between relative">
-                    
-                    <!-- Logo: Left on mobile, Center on desktop -->
-                    <div class="md:absolute md:left-1/2 md:-translate-x-1/2 z-[60]">
-                        <a href="/" class="block text-[#2c2c2c] hover:opacity-70 transition-opacity">
-                            <Logo id="header-logo" size={54} class="text-[#2c2c2c]" />
-                        </a>
-                    </div>
+<BaseLayout title="About | Mayan K Wellness" headerTheme="light">
+    
+    <!-- HERO SECTION WRAPPER -->
+    <div class="relative w-full min-h-[100svh] bg-[#d4c3b3] flex flex-col overflow-hidden">
 
-                    <!-- Left Navigation (Desktop) -->
-                    <nav class="hidden md:flex items-center gap-[34px] text-[13.5px] font-medium text-[#3b3b3b] tracking-wide">
-                        <a href="/" class="hover:text-gray-500 transition-colors">Home</a>
-                        <a href="/about" class="hover:text-gray-500 transition-colors">About</a>
-                        <a href="/services" class="hover:text-gray-500 transition-colors">Services</a>
-                        <a href="/journal" class="hover:text-gray-500 transition-colors">Journal</a>
-                    </nav>
-
-                    <!-- Right: CTA desktop, Hamburger mobile -->
-                    <div class="hidden md:flex items-center">
-                        <Button href="/contact" variant="primary" className="!px-7 !py-[13px] !text-[13px] font-medium bg-[#995531] opacity-90 text-white hover:bg-[#854322] border-none">
-                            Begin Your Journey
-                        </Button>
-                    </div>
-
-                    <button id="about-menu-toggle" class="md:hidden flex items-center justify-center p-2 z-[60] text-[#2c2c2c] transition-colors" aria-label="Toggle Menu">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="4" y1="8" x2="20" y2="8"></line>
-                            <line x1="4" y1="16" x2="20" y2="16"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Mobile Dropdown Menu -->
-                <div id="about-menu-overlay" class="md:hidden overflow-hidden transition-all duration-400 ease-in-out" style="max-height: 0; opacity: 0;">
-                    <div class="bg-[#fdfaf5] border-t border-[#e8e0d5] px-6 py-8 flex flex-col items-start gap-5 shadow-lg">
-                        <a href="/" class="about-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Home</a>
-                        <a href="/about" class="about-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">About</a>
-                        <a href="/services" class="about-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Services</a>
-                        <a href="/journal" class="about-mobile-link text-[17px] font-normal text-[#2c2c2c] hover:text-[#9c512c] transition-colors tracking-wide">Journal</a>
-                        <div class="pt-3 w-full">
-                            <Button href="/contact" variant="primary" className="!px-6 !py-[10px] !text-[14px] tracking-wide w-full text-center justify-center">Begin Your Journey</Button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- MAIN LAYOUT STRUCTURE -->
-            <main class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-10 lg:px-[60px] relative flex flex-col justify-center pb-24">
+        <!-- MAIN LAYOUT STRUCTURE -->
+        <main class="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-10 lg:px-[60px] relative flex flex-col justify-center pb-24">
+            
+            <div class="w-full lg:w-1/2 flex flex-col relative z-20 mt-6 lg:mt-12 pt-28">
                 
-                <div class="w-full lg:w-1/2 flex flex-col relative z-20 mt-6 lg:mt-12">
-                    
-                    <!-- Small pill badge -->
-                    <div>
-                        <span class="inline-block bg-[#995531] text-white text-[12px] font-medium tracking-wide rounded-full px-5 py-[6px] mb-9">
-                            About me
-                        </span>
-                    </div>
+                <!-- Small pill badge -->
+                <div>
+                    <span class="inline-block bg-[#995531] text-white text-[12px] font-medium tracking-wide rounded-full px-5 py-[6px] mb-9">
+                        About me
+                    </span>
+                </div>
 
-                    <!-- Large headline -->
-                    <h1 class="font-serif text-[48px] sm:text-[64px] lg:text-[88px] leading-[0.98] tracking-[-0.02em] text-[#2c3338] mb-9 font-normal">
-                        It started and<br/>
-                        ended with<br/>
-                        <span class="text-[#b56733]">burnout.</span>
-                    </h1>
+                <!-- Large headline -->
+                <h1 class="font-serif text-[48px] sm:text-[64px] lg:text-[88px] leading-[0.98] tracking-[-0.02em] text-[#2c3338] mb-9 font-normal">
+                    It started and<br/>
+                    ended with<br/>
+                    <span class="text-[#b56733]">burnout.</span>
+                </h1>
 
-                    <!-- Paragraph text -->
-                    <div class="space-y-[22px] text-[#55524d] text-[15px] font-light leading-[1.65] max-w-[390px]">
-                        <p>
-                            I was a consultant working 60-hour weeks and calling it ambition. One morning I woke up and couldn't get out of bed. Not from exhaustion, from emptiness.
-                        </p>
-                        <p>
-                            I'd built the career, the house, the whole thing, and felt nothing. It took falling apart to figure out what actually mattered. Now I help other people skip the falling apart bit.
-                        </p>
-                    </div>
+                <!-- Paragraph text -->
+                <div class="space-y-[22px] text-[#55524d] text-[15px] font-light leading-[1.65] max-w-[390px]">
+                    <p>
+                        I was a consultant working 60-hour weeks and calling it ambition. One morning I woke up and couldn't get out of bed. Not from exhaustion, from emptiness.
+                    </p>
+                    <p>
+                        I'd built the career, the house, the whole thing, and felt nothing. It took falling apart to figure out what actually mattered. Now I help other people skip the falling apart bit.
+                    </p>
+                </div>
 
-                    <!-- Signature text -->
-                    <div class="mt-12">
-                        <span class="font-script text-[84px] leading-none text-[#2b2b2b] ml-1 opacity-90">
-                            Maya
-                        </span>
-                    </div>
-                    
+                <!-- Signature text -->
+                <div class="mt-12">
+                    <span class="font-script text-[84px] leading-none text-[#2b2b2b] ml-1 opacity-90">
+                        Maya
+                    </span>
                 </div>
                 
-            </main>
-
-            <!-- RIGHT SIDE IMAGE (Silhoutte anchored bottom right) -->
-            <div class="absolute bottom-0 right-0 w-[58%] h-[85vh] pointer-events-none z-10 overflow-hidden hidden md:block">
-                <Image
-                    src={aboutImage}
-                    alt="Mayan K silhouette leaning forward"
-                    class="absolute bottom-0 right-[-5%] w-[110%] h-[110%] object-cover object-[center_top] mix-blend-multiply opacity-95"
-                    format="webp"
-                />
             </div>
+            
+        </main>
+
+        <!-- RIGHT SIDE IMAGE (Silhoutte anchored bottom right) -->
+        <div class="absolute bottom-0 right-0 w-[58%] h-[85vh] pointer-events-none z-10 overflow-hidden hidden md:block">
+            <Image
+                src={aboutImage}
+                alt="Mayan K silhouette leaning forward"
+                class="absolute bottom-0 right-[-5%] w-[110%] h-[110%] object-cover object-[center_top] mix-blend-multiply opacity-95"
+                format="webp"
+            />
         </div>
+    </div>
 
-        <!-- NEW SECTIONS -->
-        <HowIWork />
-        <WhatIBelieve />
-        <Qualifications />
-        <Footer />
+    <!-- NEW SECTIONS -->
+    <HowIWork />
+    <WhatIBelieve />
+    <Qualifications />
 
-        <script is:inline>
-            (function () {
-                var header = document.getElementById('about-header');
-                var toggleBtn = document.getElementById('about-menu-toggle');
-                var mobileMenu = document.getElementById('about-menu-overlay');
-                var isMenuOpen = false;
-
-                function toggleMenu() {
-                    isMenuOpen = !isMenuOpen;
-                    if (isMenuOpen) {
-                        mobileMenu.style.maxHeight = '400px';
-                        mobileMenu.style.opacity = '1';
-                        header.style.background = 'rgba(252, 251, 248, 0.96)';
-                        header.style.backdropFilter = 'blur(12px)';
-                        header.style.WebkitBackdropFilter = 'blur(12px)';
-                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-                    } else {
-                        mobileMenu.style.maxHeight = '0';
-                        mobileMenu.style.opacity = '0';
-                        onScroll();
-                        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>';
-                    }
-                }
-                if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
-                document.querySelectorAll('.about-mobile-link').forEach(function(link) {
-                    link.addEventListener('click', function() { if (isMenuOpen) toggleMenu(); });
-                });
-
-                function onScroll() {
-                    if (isMenuOpen) return;
-                    if (window.scrollY > 50) {
-                        header.style.background = 'rgba(252, 251, 248, 0.96)';
-                        header.style.backdropFilter = 'blur(12px)';
-                        header.style.WebkitBackdropFilter = 'blur(12px)';
-                        header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.04)';
-                        header.style.paddingTop = '20px';
-                        header.style.paddingBottom = '20px';
-                    } else {
-                        header.style.background = 'transparent';
-                        header.style.backdropFilter = 'none';
-                        header.style.WebkitBackdropFilter = 'none';
-                        header.style.boxShadow = 'none';
-                        header.style.paddingTop = '42px';
-                        header.style.paddingBottom = '24px';
-                    }
-                }
-                window.addEventListener('scroll', onScroll, { passive: true });
-                onScroll();
-            })();
-        </script>
-	</body>
-</html>
+</BaseLayout>
