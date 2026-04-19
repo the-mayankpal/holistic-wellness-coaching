@@ -74,20 +74,21 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
     }
 </style>
 
-<script is:inline>
-    // Self-executing function to isolate scope
-    (function() {
+<script>
+    function initPopup() {
         // Only trigger once per active window session
         if (sessionStorage.getItem('wellness_popup_seen')) {
             return;
         }
 
-        var modal = document.getElementById('global-popup-modal');
-        var content = document.getElementById('popup-content');
-        var closeBtn = document.getElementById('popup-close-btn');
+        const modal = document.getElementById('global-popup-modal');
+        const content = document.getElementById('popup-content');
+        const closeBtn = document.getElementById('popup-close-btn');
 
-        var isShown = false;
-        var timeTrigger;
+        if (!modal || !content || !closeBtn) return;
+
+        let isShown = false;
+        let timeTrigger: number | undefined;
 
         function showPopup() {
             if (isShown) return;
@@ -95,23 +96,31 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
             sessionStorage.setItem('wellness_popup_seen', 'true');
 
             // Apply Framer Motion style elegant entry
-            modal.style.opacity = '1';
-            modal.style.pointerEvents = 'auto';
-            content.style.transform = 'scale(1) translateY(0)';
+            if (modal) {
+                modal.style.opacity = '1';
+                modal.style.pointerEvents = 'auto';
+            }
+            if (content) {
+                content.style.transform = 'scale(1) translateY(0)';
+            }
 
             // Clean up event listeners after opening
             window.removeEventListener('scroll', checkScroll);
-            clearTimeout(timeTrigger);
+            if (timeTrigger) clearTimeout(timeTrigger);
         }
 
         function hidePopup() {
-            modal.style.opacity = '0';
-            modal.style.pointerEvents = 'none';
-            content.style.transform = 'scale(0.95) translateY(20px)';
+            if (modal) {
+                modal.style.opacity = '0';
+                modal.style.pointerEvents = 'none';
+            }
+            if (content) {
+                content.style.transform = 'scale(0.95) translateY(20px)';
+            }
         }
 
         // 1. Initial Timer Trigger (2000ms delay)
-        timeTrigger = setTimeout(function() {
+        timeTrigger = window.setTimeout(function() {
             showPopup();
         }, 2000);
 
@@ -133,6 +142,12 @@ const XIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" strok
                 hidePopup();
             }
         });
-        
-    })();
+    }
+
+    // Defer initialization to idle time
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => initPopup());
+    } else {
+        window.setTimeout(initPopup, 200);
+    }
 </script>

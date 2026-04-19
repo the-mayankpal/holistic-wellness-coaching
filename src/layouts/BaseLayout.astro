@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 
+import playfair400 from '@fontsource/playfair-display/files/playfair-display-latin-400-normal.woff2?url';
+
 interface Props {
 	title: string;
 	headerTheme?: 'dark' | 'light';
@@ -15,13 +17,14 @@ const { title, headerTheme = 'dark' } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="Compassionate, evidence-based wellness coaching for stress, anxiety, and burnout. Where lasting change begins." />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+        <meta name="theme-color" content="#fdfaf5" />
+
+        <link rel="preload" href={playfair400} as="font" type="font/woff2" crossorigin />
+
 		<title>{title}</title>
 	</head>
 	<body class="antialiased font-sans overflow-x-hidden">

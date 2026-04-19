@@ -36,7 +36,7 @@ const signs = [
                     <div class="orbit-arm" data-angle={angle}>
                         <div class="sign-card">
                             <div class="sign-card-avatar">
-                                <Image src={sign.img} alt="Sign" width={80} height={80} />
+                                <Image src={sign.img} alt="Sign" width={80} height={80} loading="lazy" />
                             </div>
                             <p class="sign-card-label">{sign.text}</p>
                         </div>
@@ -50,11 +50,14 @@ const signs = [
 <script>
 // JavaScript-driven orbit that adapts radius to viewport
 function initOrbit() {
+    const section = document.getElementById('signs-section');
     const ring = document.getElementById('orbit-ring');
-    if (!ring) return;
+    if (!ring || !section) return;
 
     const arms = ring.querySelectorAll('.orbit-arm');
     const count = arms.length;
+    let animationId: number | null = null;
+    let isVisible = false;
 
     function getRadius() {
         const vw = window.innerWidth;
@@ -74,6 +77,8 @@ function initOrbit() {
     const speed = 360 / 45000;
 
     function positionCards(timestamp: number) {
+        if (!isVisible) return;
+        
         if (!lastTime) lastTime = timestamp;
         const delta = timestamp - lastTime;
         lastTime = timestamp;
@@ -95,14 +100,27 @@ function initOrbit() {
             (arm as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
         });
 
-        requestAnimationFrame(positionCards);
+        animationId = requestAnimationFrame(positionCards);
     }
 
     // Pause on hover
     ring.addEventListener('mouseenter', () => { isPaused = true; });
     ring.addEventListener('mouseleave', () => { isPaused = false; });
 
-    requestAnimationFrame(positionCards);
+    // IntersectionObserver to only run animation when visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            if (isVisible) {
+                lastTime = null; // Reset lastTime to avoid jump
+                animationId = requestAnimationFrame(positionCards);
+            } else if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    observer.observe(section);
 }
 
 if (document.readyState === 'loading') {
