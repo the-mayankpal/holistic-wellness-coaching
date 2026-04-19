@@ -58,16 +58,21 @@ function initOrbit() {
     const count = arms.length;
     let animationId: number | null = null;
     let isVisible = false;
+    let cachedRadius = 420;
 
-    function getRadius() {
+    function updateRadius() {
         const vw = window.innerWidth;
-        if (vw <= 375) return 110;
-        if (vw <= 480) return 125;
-        if (vw <= 640) return 145;
-        if (vw <= 768) return 220;
-        if (vw <= 1024) return 340;
-        return 420;
+        if (vw <= 375) cachedRadius = 110;
+        else if (vw <= 480) cachedRadius = 125;
+        else if (vw <= 640) cachedRadius = 145;
+        else if (vw <= 768) cachedRadius = 220;
+        else if (vw <= 1024) cachedRadius = 340;
+        else cachedRadius = 420;
     }
+
+    // Initial and on-resize update
+    updateRadius();
+    window.addEventListener('resize', updateRadius, { passive: true });
 
     let currentRotation = 0;
     let isPaused = false;
@@ -87,17 +92,15 @@ function initOrbit() {
             currentRotation += speed * delta;
         }
 
-        const radius = getRadius();
-
         arms.forEach((arm, i) => {
             const baseAngle = (i * 360) / count;
             const totalAngle = baseAngle + currentRotation;
             const rad = (totalAngle * Math.PI) / 180;
 
-            const x = Math.cos(rad) * radius;
-            const y = Math.sin(rad) * radius;
+            const x = Math.cos(rad) * cachedRadius;
+            const y = Math.sin(rad) * cachedRadius;
 
-            (arm as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
+            (arm as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
         });
 
         animationId = requestAnimationFrame(positionCards);
@@ -116,6 +119,7 @@ function initOrbit() {
                 animationId = requestAnimationFrame(positionCards);
             } else if (animationId) {
                 cancelAnimationFrame(animationId);
+                animationId = null;
             }
         });
     }, { threshold: 0.1 });
