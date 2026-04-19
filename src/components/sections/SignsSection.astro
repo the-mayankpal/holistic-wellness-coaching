@@ -17,114 +17,294 @@ const signs = [
 ];
 ---
 
-<section class="w-full relative overflow-hidden bg-[#fcfbfa] min-h-screen py-24 md:py-[160px] flex items-center justify-center">
-    
-    <div class="relative w-full max-w-[1240px] flex flex-col items-center justify-center mx-auto md:h-[700px]">
+<section id="signs-section">
+    <div class="signs-orbit-viewport">
         
         <!-- Central Title -->
-        <div class="relative md:absolute z-10 text-center pointer-events-none px-4 mb-16 md:mb-0 md:top-1/2 md:-translate-y-1/2">
-            <h2 style="font-family: 'Inter', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 400; color: #2c3338; line-height: 1.05; letter-spacing: -0.04em;">
+        <div class="signs-title-center">
+            <h2 class="signs-heading">
                 The signs that something<br/>
-                <span style="color: #9c512c;">needs</span> to change.
+                <span class="signs-accent">needs</span> to change.
             </h2>
         </div>
 
-        <!-- Orbital Engine (CSS Driven, Desktop Only) -->
-        <div class="orbit-master hidden md:block" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0;">
+        <!-- Orbital Ring Animation -->
+        <div class="orbit-ring" id="orbit-ring">
             {signs.map((sign, i) => {
                 const angle = i * (360 / signs.length);
                 return (
-                    <div class="orbit-arm" style={`position: absolute; top: 0; left: 0; transform: rotate(${angle}deg);`}>
-                        <!-- Radius offset (Desktop 420px) -->
-                        <div class="orbit-offset" style="position: absolute; left: 420px; top: 0;">
-                            <!-- Counter-Spin engine removes the rotation imparted by the master spin over time -->
-                            <div class="orbit-counter-spin">
-                                <!-- Static offset correction removes the initial angle rotation so card stands perfectly upright -->
-                                <div style={`transform: rotate(-${angle}deg);`}>
-                                    
-                                    <!-- Actual Visible Card Render -->
-                                    <div class="sign-styled-card" style="position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; background-color: #f4ebd9; padding: 8px 28px 8px 8px; border-radius: 9999px; gap: 18px; width: max-content; max-width: 360px; box-shadow: 0 12px 30px rgba(0,0,0,0.03); pointer-events: auto; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                                        
-                                        <!-- Card Image -->
-                                        <div style="width: 72px; height: 72px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                                            <Image src={sign.img} alt="Sign" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
-                                        </div>
-                                        
-                                        <!-- Card Text -->
-                                        <p style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 300; color: #3b3631; line-height: 1.45; margin: 0; text-align: left; padding-right: 8px;">
-                                            {sign.text}
-                                        </p>
-                                        
-                                    </div>
-
-                                </div>
+                    <div class="orbit-arm" data-angle={angle}>
+                        <div class="sign-card">
+                            <div class="sign-card-avatar">
+                                <Image src={sign.img} alt="Sign" width={80} height={80} />
                             </div>
+                            <p class="sign-card-label">{sign.text}</p>
                         </div>
                     </div>
                 );
             })}
         </div>
-
-        <!-- Mobile Vertical Stack (CSS Driven, Mobile Only) -->
-        <div class="flex flex-col md:hidden gap-5 px-6 relative z-10 w-full max-w-[380px]">
-            {signs.map((sign) => (
-                <div class="flex items-center bg-[#f4ebd9] p-2 pr-5 rounded-full gap-4 pointer-events-auto" style="box-shadow: 0 8px 24px rgba(0,0,0,0.03);">
-                    <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                        <Image src={sign.img} alt="Sign" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
-                    </div>
-                    <p style="font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 300; color: #3b3631; line-height: 1.4; margin: 0; text-align: left;">
-                        {sign.text}
-                    </p>
-                </div>
-            ))}
-        </div>
-
     </div>
-
-    <!-- Injecting styles cleanly in the Astro block -->
-    <style>
-        /* Orbital Mathematics */
-        .orbit-master {
-            animation: masterSpin 45s linear infinite;
-        }
-        .orbit-counter-spin {
-            animation: counterSpin 45s linear infinite;
-        }
-
-        @keyframes masterSpin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes counterSpin {
-            100% { transform: rotate(-360deg); }
-        }
-
-        /* Interactive Hover Pause - Premium Polish */
-        .orbit-master:hover,
-        .orbit-master:hover .orbit-counter-spin {
-            animation-play-state: paused;
-        }
-
-        /* Hover effect on cards */
-        .sign-styled-card:hover {
-            transform: translate(-50%, -50%) scale(1.03) !important;
-            box-shadow: 0 16px 40px rgba(156, 81, 44, 0.08) !important;
-        }
-
-        /* Small Screen Safeties */
-        @media (max-width: 1024px) {
-            .orbit-offset { left: 340px !important; }
-            h2 { font-size: 56px !important; }
-            .sign-styled-card { max-width: 300px !important; padding: 6px 20px 6px 6px !important; gap: 12px !important; }
-            .sign-styled-card > div { width: 56px !important; height: 56px !important; }
-            .sign-styled-card p { font-size: 12.5px !important; }
-        }
-
-        @media (max-width: 768px) {
-            .orbit-offset { left: 240px !important; }
-            h2 { font-size: 40px !important; }
-            .sign-styled-card { max-width: 260px !important; gap: 10px !important; }
-            .sign-styled-card > div { width: 44px !important; height: 44px !important; }
-            .sign-styled-card p { font-size: 11px !important; }
-        }
-    </style>
 </section>
+
+<script>
+// JavaScript-driven orbit that adapts radius to viewport
+function initOrbit() {
+    const ring = document.getElementById('orbit-ring');
+    if (!ring) return;
+
+    const arms = ring.querySelectorAll('.orbit-arm');
+    const count = arms.length;
+
+    function getRadius() {
+        const vw = window.innerWidth;
+        if (vw <= 375) return 110;
+        if (vw <= 480) return 125;
+        if (vw <= 640) return 145;
+        if (vw <= 768) return 220;
+        if (vw <= 1024) return 340;
+        return 420;
+    }
+
+    let currentRotation = 0;
+    let isPaused = false;
+    let lastTime: number | null = null;
+
+    // Speed: degrees per millisecond (360° / 45s)
+    const speed = 360 / 45000;
+
+    function positionCards(timestamp: number) {
+        if (!lastTime) lastTime = timestamp;
+        const delta = timestamp - lastTime;
+        lastTime = timestamp;
+
+        if (!isPaused) {
+            currentRotation += speed * delta;
+        }
+
+        const radius = getRadius();
+
+        arms.forEach((arm, i) => {
+            const baseAngle = (i * 360) / count;
+            const totalAngle = baseAngle + currentRotation;
+            const rad = (totalAngle * Math.PI) / 180;
+
+            const x = Math.cos(rad) * radius;
+            const y = Math.sin(rad) * radius;
+
+            (arm as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        requestAnimationFrame(positionCards);
+    }
+
+    // Pause on hover
+    ring.addEventListener('mouseenter', () => { isPaused = true; });
+    ring.addEventListener('mouseleave', () => { isPaused = false; });
+
+    requestAnimationFrame(positionCards);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOrbit);
+} else {
+    initOrbit();
+}
+</script>
+
+<style>
+    /* ─── Section ─── */
+    #signs-section {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        background-color: #fcfbfa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 160px 0;
+    }
+
+    /* ─── Viewport Container ─── */
+    .signs-orbit-viewport {
+        position: relative;
+        width: 900px;
+        height: 900px;
+        flex-shrink: 0;
+    }
+
+    /* ─── Title ─── */
+    .signs-title-center {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        pointer-events: none;
+        width: 100%;
+        padding: 0 60px;
+    }
+
+    .signs-heading {
+        font-family: 'Inter', sans-serif;
+        font-size: 72px;
+        font-weight: 400;
+        color: #2c3338;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin: 0;
+    }
+
+    .signs-accent {
+        color: #9c512c;
+    }
+
+    /* ─── Orbit Ring ─── */
+    .orbit-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+    }
+
+    .orbit-arm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        will-change: transform;
+    }
+
+    /* ─── Card ─── */
+    .sign-card {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        background-color: #f4ebd9;
+        padding: 8px 28px 8px 8px;
+        border-radius: 9999px;
+        gap: 18px;
+        width: max-content;
+        max-width: 360px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.03);
+        pointer-events: auto;
+        cursor: pointer;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .sign-card:hover {
+        box-shadow: 0 16px 40px rgba(156, 81, 44, 0.08);
+    }
+
+    .sign-card-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .sign-card-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .sign-card-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        color: #3b3631;
+        line-height: 1.45;
+        margin: 0;
+        text-align: left;
+        padding-right: 8px;
+    }
+
+    /* ─── Tablet (≤1024px) ─── */
+    @media (max-width: 1024px) {
+        .signs-orbit-viewport {
+            width: 740px;
+            height: 740px;
+        }
+        .signs-heading { font-size: 56px; }
+        .sign-card { max-width: 300px; padding: 6px 20px 6px 6px; gap: 12px; }
+        .sign-card-avatar { width: 56px; height: 56px; }
+        .sign-card-label { font-size: 12.5px; }
+    }
+
+    /* ─── Tablet portrait (≤768px) ─── */
+    @media (max-width: 768px) {
+        #signs-section {
+            min-height: auto;
+            padding: 80px 0;
+        }
+        .signs-orbit-viewport {
+            width: 500px;
+            height: 500px;
+        }
+        .signs-heading { font-size: 36px; }
+        .signs-title-center { padding: 0 60px; }
+        .sign-card { max-width: 200px; padding: 5px 12px 5px 5px; gap: 8px; }
+        .sign-card-avatar { width: 38px; height: 38px; }
+        .sign-card-label { font-size: 10px; line-height: 1.3; padding-right: 2px; }
+    }
+
+    /* ─── Mobile (≤640px): Avatar-only cards ─── */
+    @media (max-width: 640px) {
+        #signs-section {
+            padding: 48px 0;
+        }
+        .signs-orbit-viewport {
+            width: 350px;
+            height: 350px;
+        }
+        .signs-heading { font-size: 26px; letter-spacing: -0.03em; }
+        .signs-title-center { padding: 0 50px; }
+
+        /* Cards become avatar-only circles on mobile */
+        .sign-card {
+            padding: 0;
+            gap: 0;
+            border-radius: 50%;
+            max-width: none;
+            width: 56px;
+            height: 56px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        .sign-card-avatar {
+            width: 56px;
+            height: 56px;
+        }
+        .sign-card-label {
+            display: none;
+        }
+    }
+
+    /* ─── Smaller mobile (≤480px) ─── */
+    @media (max-width: 480px) {
+        .signs-orbit-viewport {
+            width: 310px;
+            height: 310px;
+        }
+        .signs-heading { font-size: 24px; }
+        .sign-card { width: 50px; height: 50px; }
+        .sign-card-avatar { width: 50px; height: 50px; }
+    }
+
+    /* ─── Small phones (≤375px) ─── */
+    @media (max-width: 375px) {
+        .signs-orbit-viewport {
+            width: 280px;
+            height: 280px;
+        }
+        .signs-heading { font-size: 21px; }
+        .signs-title-center { padding: 0 36px; }
+        .sign-card { width: 44px; height: 44px; }
+        .sign-card-avatar { width: 44px; height: 44px; }
+    }
+</style>
