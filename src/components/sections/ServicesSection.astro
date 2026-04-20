@@ -1,34 +1,29 @@
 ---
 import Button from '../ui/Button.astro';
 import ServiceCard from '../ui/ServiceCard.astro';
+import { client, urlFor } from '../../lib/sanity';
 
+// Local fallbacks
 import stressImg from '../../assets/images/services/stress.png';
 import burnoutImg from '../../assets/images/services/burnout.png';
 import transitionsImg from '../../assets/images/services/transitions.png';
 import mindfulnessImg from '../../assets/images/services/mindfulness.png';
 
-const services = [
-  {
-    title: "Stress & Anxiety",
-    description: "Gentle practices to calm your mind, ease tension, and bring you back.",
-    imageSrc: stressImg
-  },
-  {
-    title: "Burnout Recovery",
-    description: "Rebuild your energy and rediscover your purpose without burning it all down.",
-    imageSrc: burnoutImg
-  },
-  {
-    title: "Life Transitions",
-    description: "Support through career shifts, loss, and the in-between moments.",
-    imageSrc: transitionsImg
-  },
-  {
-    title: "Mindfulness Tech",
-    description: "Practical techniques you can actually use, even on your worst days.",
-    imageSrc: mindfulnessImg
-  }
-];
+const localFallbacks = {
+  "Stress & Anxiety": stressImg,
+  "Burnout Recovery": burnoutImg,
+  "Life Transitions": transitionsImg,
+  "Mindfulness Tech": mindfulnessImg
+};
+
+const servicesData = await client.fetch(`*[_type == "service"]`);
+const services = servicesData.map(service => {
+  const sanityUrl = service.image ? urlFor(service.image).url() : null;
+  return {
+    ...service,
+    imageSrc: sanityUrl || localFallbacks[service.title] || stressImg
+  };
+});
 ---
 
 <section id="services" class="w-full bg-[#f8f5ee] py-16 lg:py-32">

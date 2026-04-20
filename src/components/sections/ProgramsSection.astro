@@ -1,36 +1,8 @@
 ---
 import ProgramCard from '../ui/ProgramCard.astro';
+import { client } from '../../lib/sanity';
 
-const programs = [
-  {
-    title: "Calm Collective",
-    typeBadge: "Group Program",
-    price: "$899",
-    description: "Learn alongside others while receiving individual guidance tailored to you.",
-    features: [
-      "8 Weekly Group Calls (Max 6 People)",
-      "Private Community Access",
-      "Two 1:1 Check-Ins",
-      "Meditation Library",
-      "Weekly Exercises",
-      "3 Months Extended Access"
-    ]
-  },
-  {
-    title: "Reset & Restore",
-    typeBadge: "1:1 Premium",
-    price: "$2,999",
-    description: "Deep, personalized work to completely transform your relationship with stress.",
-    features: [
-      "12 Weekly 1-Hour Sessions",
-      "Personalized Toolkit",
-      "Custom Meditation Recordings",
-      "Weekday Text Support",
-      "Sustainability Plan",
-      "Lifetime Session Recordings"
-    ]
-  }
-];
+const programs = await client.fetch(`*[_type == "program"] | order(price asc)`);
 ---
 
 <section id="programs" class="w-full bg-[#fdfaf5] py-16 lg:py-32 border-t border-[#e2dacb]/40">

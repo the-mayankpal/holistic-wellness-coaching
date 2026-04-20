@@ -1,5 +1,8 @@
 ---
 import FAQItem from '../ui/FAQItem.astro';
+import { client } from '../../lib/sanity';
+
+const faqs = await client.fetch(`*[_type == "faq"] | order(order asc)`);
 
 const journeySteps = [
   {
@@ -39,29 +42,6 @@ const journeySteps = [
             <path d="M6.34 17.66l-1.41 1.41"></path>
             <path d="M19.07 4.93l-1.41 1.41"></path>
           </svg>`
-  }
-];
-
-const faqs = [
-  {
-    question: "Do I need technical knowledge to work with you?",
-    answer: "No, this process is entirely about you. We'll find what works intuitively for your life."
-  },
-  {
-    question: "How long does it take to see results?",
-    answer: "Deep transformation takes time, but many clients feel a significant shift in clarity and relief within the first 3 to 4 sessions, as we implement immediate grounding practices."
-  },
-  {
-    question: "What if the automation doesn't work for my business?",
-    answer: "We adapt the systems until they fit seamlessly into your workflow. Customization is embedded into the entire journey."
-  },
-  {
-    question: "How much does it cost?",
-    answer: "Our core programs range from $899 for our intimate 6-person group cohorts, up to $2,999 for the deep 1:1 transformative experience over 12 weeks."
-  },
-  {
-    question: "What happens after implementation?",
-    answer: "You receive a customized sustainability plan and retain access to dedicated check-in systems so you never feel like you're drifting."
   }
 ];
 ---

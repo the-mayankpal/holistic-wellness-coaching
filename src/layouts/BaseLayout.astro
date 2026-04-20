@@ -8,27 +8,55 @@ import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 
 interface Props {
 	title: string;
+	description?: string;
+    image?: string;
+    canonicalURL?: string;
 	headerTheme?: 'dark' | 'light';
 }
 
-const { title, headerTheme = 'dark' } = Astro.props;
+const { 
+    title, 
+    description = "Compassionate, evidence-based wellness coaching for stress, anxiety, and burnout. Where lasting change begins.",
+    image = "/og-image.jpg", // Default social image
+    canonicalURL = Astro.url.href,
+    headerTheme = 'dark' 
+} = Astro.props;
+
+const siteTitle = "Mayan K Wellness";
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Compassionate, evidence-based wellness coaching for stress, anxiety, and burnout. Where lasting change begins." />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
         <meta name="theme-color" content="#fdfaf5" />
 
+        <!-- Primary Meta Tags -->
+        <title>{fullTitle}</title>
+        <meta name="title" content={fullTitle} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={fullTitle} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
         <link rel="preload" href={playfair400} as="font" type="font/woff2" crossorigin />
         <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
-
-		<title>{title}</title>
-	</head>
 	<body class="antialiased font-sans overflow-x-hidden">
 		<Header theme={headerTheme} />
 		<slot />

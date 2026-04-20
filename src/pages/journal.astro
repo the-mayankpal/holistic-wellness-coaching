@@ -2,17 +2,48 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import Button from '../components/ui/Button.astro';
+import { client, urlFor } from '../lib/sanity';
 
-// Import newly generated images for journal
+// Local fallbacks for blog images
 import imgBurnout from '../assets/images/services/journal_burnout_woman_1776547684317.png';
 import imgStress from '../assets/images/services/journal_stress_woman_1776547699202.png';
 import imgRest from '../assets/images/services/journal_rest_woman_1776547717375.png';
 import imgMindfulness from '../assets/images/services/journal_mindfulness_1776548196399.png';
 import imgNutrition from '../assets/images/services/journal_nutrition_1776548215023.png';
 import imgBoundaries from '../assets/images/services/journal_boundaries_1776548232811.png';
+
+const localFallbacks = {
+    "The difference between tired and burned out": imgBurnout,
+    "Your body keeps the score even when you're fine": imgStress,
+    "Why \"just rest\" is terrible advice": imgRest,
+    "You don't need to meditate for an hour": imgMindfulness,
+    "What I actually eat in a day": imgNutrition,
+    "Setting boundaries doesn't make you difficult": imgBoundaries
+};
+
+const postsData = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`);
+
+const posts = postsData.map(post => {
+    const sanityUrl = post.mainImage ? urlFor(post.mainImage).url() : null;
+    return {
+        ...post,
+        imageSrc: sanityUrl || localFallbacks[post.title] || imgStress,
+        isRemote: !!sanityUrl,
+        category: post.category || 'Journal',
+        date: new Date(post.publishedAt).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        })
+    };
+});
 ---
 
-<BaseLayout title="Journal | Mayan K Wellness" headerTheme="light">
+<BaseLayout 
+    title="Journal | Mayan K Wellness" 
+    description="Honest writing on mindfulness, burnout recovery, and mental clarity. Practical techniques for finding balance in a busy world."
+    headerTheme="light"
+>
     
     <!-- HERO SECTION -->
     <div class="relative w-full flex flex-col justify-start" style="background-color: #f4ebd9; padding-top: 154px; padding-bottom: 120px;">
@@ -53,133 +84,43 @@ import imgBoundaries from '../assets/images/services/journal_boundaries_17765482
 
             <!-- Articles Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full text-left" style="gap: 28px;">
-                
-                <!-- Card 1 -->
-                <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgBurnout} alt="Burnout" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Burnout
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            The difference between tired and burned out
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            Everyone says they're burned out. But there's a real difference between needing a weekend off and needing to fundamentally change how you're living.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Mar 28, 2025 <span class="mx-2">&bull;</span> 6 min read
+                {posts.map((post, index) => (
+                    <div 
+                        class={`flex flex-col relative group cursor-pointer ${index >= 3 ? 'hidden-card' : ''}`} 
+                        style={`display: ${index >= 3 ? 'none' : 'flex'}; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;`}
+                    >
+                        <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
+                            {post.isRemote ? (
+                                <img 
+                                    src={post.imageSrc} 
+                                    alt={post.title} 
+                                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <Image 
+                                    src={post.imageSrc} 
+                                    alt={post.title} 
+                                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                />
+                            )}
+                        </div>
+                        <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
+                            <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
+                                {post.category}
+                            </span>
+                            <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
+                                {post.title}
+                            </h3>
+                            <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
+                                {post.excerpt}
+                            </p>
+                            <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
+                                {post.date} <span class="mx-2">&bull;</span> 5 min read
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgStress} alt="Stress" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Stress
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            Your body keeps the score even when you're fine
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            Stress doesn't always look like stress. Sometimes it shows up as a stiff neck, a short temper, or a 3am wake-up you can't explain.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Mar 21, 2025 <span class="mx-2">&bull;</span> 5 min read
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="flex flex-col relative group cursor-pointer" style="background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgRest} alt="Rest" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Self-care
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            Why "just rest" is terrible advice
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            Rest isn't one thing. There are at least seven types, and most people are only getting one of them.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Mar 14, 2025 <span class="mx-2">&bull;</span> 4 min read
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 (Hidden Initially) -->
-                <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgMindfulness} alt="Mindfulness" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Mindfulness
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            You don't need to meditate for an hour
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            The wellness industry makes mindfulness feel like a performance. It doesn't have to be. Here's what actually works for people with busy lives.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Mar 7, 2025 <span class="mx-2">&bull;</span> 4 min read
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5 (Hidden Initially) -->
-                <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgNutrition} alt="Nutrition" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Nutrition
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            What I actually eat in a day
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            Tracking macros made me miserable. Here's the simpler approach that actually stuck.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Feb 28, 2025 <span class="mx-2">&bull;</span> 5 min read
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6 (Hidden Initially) -->
-                <div class="hidden-card relative group cursor-pointer" style="display: none; flex-direction: column; background-color: #f1ebd9; border-radius: 14px; overflow: hidden; transition: transform 0.3s ease;">
-                    <div class="w-full relative overflow-hidden flex-shrink-0" style="height: 240px;">
-                        <Image src={imgBoundaries} alt="Boundaries" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
-                    </div>
-                    <div class="flex flex-col items-start w-full flex-grow" style="padding: 30px 28px 34px 28px; flex-grow: 1;">
-                        <span style="background-color: #faeedf; color: #a35d3d; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; letter-spacing: 0.02em;">
-                            Stress
-                        </span>
-                        <h3 class="font-medium" style="color: #2c3338; font-size: 19px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 14px;">
-                            Setting boundaries doesn't make you difficult
-                        </h3>
-                        <p class="font-light" style="color: #635f5a; font-size: 13.5px; line-height: 1.6; margin-bottom: 32px;">
-                            Most of my clients feel guilty about boundaries. Here's what I tell them.
-                        </p>
-                        <div class="flex items-center font-light w-full" style="color: #8c8882; font-size: 12px; margin-top: auto;">
-                            Feb 14, 2025 <span class="mx-2">&bull;</span> 5 min read
-                        </div>
-                    </div>
-                </div>
-
+                ))}
             </div>
 
             <!-- Load More Button -->
