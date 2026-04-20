@@ -4,31 +4,21 @@ import { Image } from 'astro:assets';
 interface Props {
   title: string;
   description: string;
-  imageSrc: any; // Allow metadata or string URL
+  imageSrc: ImageMetadata;
 }
 
 const { title, description, imageSrc } = Astro.props;
-const isRemote = typeof imageSrc === 'string';
 ---
 
 <div class="flex flex-col bg-[#efeae0] rounded-[1.25rem] overflow-hidden shadow-sm transition-transform duration-300 hover:scale-[1.01]">
   <!-- Image Header -->
   <div class="w-full aspect-square relative">
-    {isRemote ? (
-      <img 
-        src={imageSrc} 
-        alt={title} 
-        class="absolute inset-0 w-full h-full object-cover" 
-        loading="lazy"
-      />
-    ) : (
-      <Image 
-        src={imageSrc} 
-        alt={title} 
-        class="absolute inset-0 w-full h-full object-cover" 
-        format="webp" 
-      />
-    )}
+    <Image 
+      src={imageSrc} 
+      alt={title} 
+      class="absolute inset-0 w-full h-full object-cover" 
+      format="webp" 
+    />
   </div>
   
   <!-- Content Body -->

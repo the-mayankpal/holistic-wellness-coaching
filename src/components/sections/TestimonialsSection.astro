@@ -1,12 +1,39 @@
+---
 import Button from '../ui/Button.astro';
 import TestimonialCard from '../ui/TestimonialCard.astro';
-import { sanityClient } from "sanity:client";
 
-const testimonials = await sanityClient.fetch(`*[_type == "testimonial"] | order(order asc) {
-  quote,
-  "authorName": name,
-  "authorRole": jobTitle
-}`);
+const testimonials = [
+  {
+    quote: "I used to lie awake replaying work conversations. Now I actually sleep through the night. Maya helped me find calm in the chaos.",
+    authorName: "Sarah Silos",
+    authorRole: "Marketing Director"
+  },
+  {
+    quote: "Going through my divorce felt impossible while managing everything else. Maya helped me rebuild my confidence and create space for what truly mattered in my life which helped both myself and my family.",
+    authorName: "Elena Azalea",
+    authorRole: "Marketing Director"
+  },
+  {
+    quote: "I thought burnout was just part of entrepreneurship. Maya taught me that boundaries actually make you more effective.",
+    authorName: "Mika Wazowski",
+    authorRole: "Sales Manager"
+  },
+  {
+    quote: "I was drowning in stress from travel and deadlines. Maya's simple breathing techniques changed everything.",
+    authorName: "Alex Morgan",
+    authorRole: "Startup Founder"
+  },
+  {
+    quote: "I used to feel guilty taking breaks. Maya showed me that rest isn't laziness, it's necessary for creativity and focus.",
+    authorName: "James Wilson",
+    authorRole: "Freelance Designer"
+  },
+  {
+    quote: "Maya's techniques actually work during crazy busy days at the office. I finally have practical tools that fit into real life, not just theory.",
+    authorName: "Priya Patel",
+    authorRole: "Nurse"
+  }
+];
 
 const features = ["Amsterdam", "venice.", "Hamilton", "CALIFORNIA", "Amsterdam"];
 ---

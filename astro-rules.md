@@ -4,7 +4,7 @@
 - **Framework**: Astro
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
-- **CMS**: Sanity
+- **CMS**: None (Hardcoded for now)
 - **Animations**: Framer Motion
 - **Email**: Resend
 - **Database** (if needed): Supabase
@@ -60,7 +60,6 @@ root/
 │   │   └── blog/
 │   │
 │   ├── lib/               — utility functions, API clients, helpers
-│   │   ├── sanity.ts      — sanity client setup
 │   │   ├── resend.ts      — resend email setup
 │   │   └── utils.ts       — general helper functions
 │   │
@@ -70,9 +69,6 @@ root/
 │   └── types/             — TypeScript type definitions
 │       └── index.ts
 │
-├── sanity/                — Sanity studio and schema files
-│   ├── schemas/
-│   └── sanity.config.ts
 │
 ├── astro.config.mjs
 ├── tailwind.config.mjs
@@ -88,8 +84,7 @@ root/
 - **Never** place components directly in `src/components/` root — always go inside `ui/`, `sections/`, `layout/`, or `common/`
 - `public/assets/` is for files served as-is with no processing
 - `src/assets/` is for files that Astro will process and optimize
-- All Sanity related files live inside the `sanity/` folder at root, never mixed into `src/`
-- All third party client setup files (Sanity client, Resend, Supabase) live in `src/lib/`
+- All third party client setup files (Resend, Supabase) live in `src/lib/`
 - Environment variables always go in `.env` — never hardcode API keys anywhere
 
 ---
@@ -108,7 +103,7 @@ root/
 ## Naming Conventions
 
 - Components: `PascalCase` — `HeroSection.astro`, `ContactForm.tsx`
-- Utility files: `camelCase` — `sanity.ts`, `utils.ts`
+- Utility files: `camelCase` — `utils.ts`
 - Pages: `kebab-case` — `about.astro`, `our-team.astro`
 - Image files: `kebab-case` — `hero-banner.jpg`, `team-photo.webp`
 - CSS variables: `kebab-case` — `--color-primary`, `--font-heading`
