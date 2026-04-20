@@ -16,7 +16,8 @@ export default defineConfig({
       // We pull from environment variables for privacy, with fallbacks for build stability
       projectId: process.env.PUBLIC_SANITY_PROJECT_ID || 'jatg6f0i',
       dataset: process.env.PUBLIC_SANITY_DATASET || 'wellness_cms',
-      studioBasePath: '/studio', 
+      studioBasePath: '/studio',
+      useCdn: false,
     }),
   ],
 
