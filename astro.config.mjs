@@ -5,8 +5,14 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import sanity from '@sanity/astro';
+import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
+  output: 'hybrid',
+  adapter: vercel(),
   build: {
     inlineStylesheets: 'always'
   },
@@ -15,5 +21,13 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    sitemap(),
+    sanity({
+      projectId: 'ltc47ws4',
+      dataset: 'production',
+      studioBasePath: '/studio'
+    }),
+    react()
+  ]
 });
