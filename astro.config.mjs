@@ -4,9 +4,12 @@ import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
+
   integrations: [
     react(),
     sanity({
@@ -16,9 +19,11 @@ export default defineConfig({
       studioBasePath: '/studio', 
     }),
   ],
+
   build: {
     inlineStylesheets: 'always'
   },
+
   vite: {
     plugins: [tailwindcss()],
     define: {
@@ -36,5 +41,7 @@ export default defineConfig({
         '@sanity/icons',
       ],
     },
-  }
+  },
+
+  adapter: vercel()
 });
