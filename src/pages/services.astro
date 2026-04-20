@@ -1,18 +1,19 @@
----
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import Button from '../components/ui/Button.astro';
+import { sanityClient } from "sanity:client";
 
 // Import newly generated components for the extended sections
 import WhatToExpect from '../components/sections/services/WhatToExpect.astro';
 import ProgramsSection from '../components/sections/ProgramsSection.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
 
-// Import newly generated images
-import imgStress from '../assets/images/services/stress_anxiety_banner_1776545689108.png';
-import imgBurnout from '../assets/images/services/burnout_recovery_banner_1776545703294.png';
-import imgTransitions from '../assets/images/services/life_transitions_banner_1776545720609.png';
-import imgMindful from '../assets/images/services/mindful_living_banner_1776545736355.png';
+const services = await sanityClient.fetch(`*[_type == "service"] | order(order asc) {
+  title,
+  description,
+  bulletPoints,
+  "imageUrl": image.asset->url
+}`);
 ---
 
 <BaseLayout title="Services | Mayan K Wellness" headerTheme="light">
@@ -65,102 +66,27 @@ import imgMindful from '../assets/images/services/mindful_living_banner_17765457
 
         <!-- Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 w-full mx-auto text-left" style="gap: 32px; max-width: 1040px;">
-            
-            <!-- Card 1: Stress & Anxiety -->
-            <div class="flex flex-col" style="background-color: #f1eae1; border-radius: 16px; overflow: hidden;">
-                <div class="relative w-full" style="height: 270px;">
-                    <Image src={imgStress} alt="Stress and Anxiety" class="absolute inset-0 w-full h-full object-cover" />
+            {services.map((service) => (
+                <div class="flex flex-col" style="background-color: #f1eae1; border-radius: 16px; overflow: hidden;">
+                    <div class="relative w-full" style="height: 270px;">
+                        <img src={service.imageUrl} alt={service.title} class="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
+                        <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">{service.title}</h3>
+                        <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
+                            {service.description}
+                        </p>
+                        <ul class="flex flex-col" style="gap: 12px; list-style: none; padding: 0; margin: 0; width: 100%;">
+                            {service.bulletPoints && service.bulletPoints.map((point) => (
+                                <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
+                                    <span style="color: #9c512c; font-size: 15px;">&rarr;</span> {point}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-                <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
-                    <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Stress & Anxiety</h3>
-                    <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
-                        When your mind won't switch off and your body's stuck in fight-or-flight. We work on calming your nervous system and building a life that doesn't constantly overwhelm you.
-                    </p>
-                    <ul class="flex flex-col" style="gap: 12px; list-style: none; padding: 0; margin: 0; width: 100%;">
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Nervous system regulation
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Breathing and grounding techniques
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Sustainable stress management
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 2: Burnout recovery -->
-            <div class="flex flex-col" style="background-color: #f1eae1; border-radius: 16px; overflow: hidden;">
-                <div class="relative w-full" style="height: 270px;">
-                     <Image src={imgBurnout} alt="Burnout recovery" class="absolute inset-0 w-full h-full object-cover" />
-                </div>
-                <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
-                    <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Burnout recovery</h3>
-                    <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
-                        You pushed too hard for too long and now you're running on empty. We rebuild from the ground up, starting with rest and working toward a routine that doesn't break you again.
-                    </p>
-                    <ul class="flex flex-col" style="gap: 12px; list-style: none; padding: 0; margin: 0; width: 100%;">
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Rest and recovery planning
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Boundary setting
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Rebuilding sustainable routines
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 3: Life transitions -->
-            <div class="flex flex-col" style="background-color: #f1eae1; border-radius: 16px; overflow: hidden;">
-                <div class="relative w-full" style="height: 270px;">
-                     <Image src={imgTransitions} alt="Life transitions" class="absolute inset-0 w-full h-full object-cover" />
-                </div>
-                <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
-                    <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Life transitions</h3>
-                    <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
-                        Career changes, relationship shifts, becoming a parent, moving countries. The big life moments that leave you feeling unsteady. We work through the adjustment together.
-                    </p>
-                    <ul class="flex flex-col" style="gap: 12px; list-style: none; padding: 0; margin: 0; width: 100%;">
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Navigating uncertainty
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Identity and confidence rebuilding
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Creating stability in change
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Card 4: Mindful living -->
-            <div class="flex flex-col" style="background-color: #f1eae1; border-radius: 16px; overflow: hidden;">
-                <div class="relative w-full" style="height: 270px;">
-                     <Image src={imgMindful} alt="Mindful living" class="absolute inset-0 w-full h-full object-cover" />
-                </div>
-                <div class="flex flex-col items-start w-full" style="padding: 28px 24px 34px 24px;">
-                    <h3 class="font-medium" style="color: #282725; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 14px;">Mindful living</h3>
-                    <p class="font-light" style="color: #635f5a; font-size: 14.5px; line-height: 1.65; margin-bottom: 24px;">
-                        For people who want to be more intentional about how they live. We look at habits, routines, and boundaries so you actually enjoy your days instead of just getting through them.
-                    </p>
-                    <ul class="flex flex-col" style="gap: 12px; list-style: none; padding: 0; margin: 0; width: 100%;">
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Daily habits and routines
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Healthy boundaries
-                        </li>
-                        <li class="flex items-start font-light" style="gap: 10px; color: #635f5a; font-size: 13.5px; line-height: 1.4;">
-                            <span style="color: #9c512c; font-size: 15px;">&rarr;</span> Intentional living practices
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            ))}
+        </div>
 
         </div>
     </section>
