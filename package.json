@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "migrate": "node --env-file=.env scripts/migrate-to-sanity.mjs",
     "astro": "astro"
   },
   "dependencies": {
